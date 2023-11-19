@@ -4,7 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marco Rotella - Resume</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline CSS for demonstration */
+        body, h1, h2, h3, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 50px;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+        }
+
+        .hero {
+            background-color: #e7e7e7;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,40 +79,56 @@
         </nav>
     </header>
 
-    <section id="hero">
+    <div class="hero">
         <h1>Marco Rotella</h1>
         <p>Innovation and Technology Manager</p>
-    </section>
+    </div>
 
-    <section id="about">
+    <section id="about" class="content-section">
         <h2>About Me</h2>
-        <p>Experienced Innovation and Technology Manager... (your summary here)</p>
+        <p>
+            Experienced Innovation and Technology Manager with a demonstrated history of working in the automotive industry and IT management. Skilled in project inception, technical analysis, and bringing IT infrastructures up to modern standards. Proven ability to lead software development and automation teams, with a focus on Industry 4.0 advancements. Adept at managing technical aspects of funded projects, from drafting proposals to overseeing execution and technical management.
+        </p>
     </section>
 
-    <section id="experience">
+    <section id="experience" class="content-section">
         <h2>Professional Experience</h2>
-        <!-- Add your experience items here -->
+        <div>
+            <h3>Site Operations Manager - REI Lab s.r.l. (2020 - 2022)</h3>
+            <p>Managed a new e-powertrain testing lab from the ground up, overseeing facility requirements, IT infrastructure setup, and project management.</p>
+        </div>
+        <!-- Repeat for each experience entry -->
     </section>
 
-    <section id="education">
+    <section id="education" class="content-section">
         <h2>Education & Certifications</h2>
-        <!-- Add your education items here -->
+        <p>High School Diploma in Electronics and Telecommunications</p>
+        <ul>
+            <li>Network Administration</li>
+            <li>Linux Server Administration</li>
+            <li>Firewall Configuration (pfSense, Fortigate)</li>
+            <li>Cloud Platform and Services</li>
+            <li>Terraform</li>
+        </ul>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="content-section">
         <h2>Skills</h2>
-        <!-- Add your skills here -->
+        <ul>
+            <li>Odoo</li>
+            <li>Requirements specifications</li>
+            <!-- Add all skills here -->
+        </ul>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="content-section">
         <h2>Contact Me</h2>
-        <p>Feel free to reach out via email at <a href="mailto:marco.rotella@gmail.com">marco.rotella@gmail.com</a>.</p>
+        <p>Email: <a href="mailto:marco.rotella@gmail.com">marco.rotella@gmail.com</a></p>
+        <p>Mobile: 3495024632</p>
     </section>
 
     <footer>
         <p>&copy; 2023 Marco Rotella</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
