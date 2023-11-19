@@ -26,6 +26,28 @@
             margin: 0;
             padding: 0;
         }
+        nav {
+            background: #f8f8f8;
+            padding: 10px 0;
+            border-bottom: 2px solid #e8491d;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
         section {
             padding: 20px 0;
         }
@@ -39,17 +61,38 @@
         a:hover {
             text-decoration: underline;
         }
+        .profile-pic {
+            width: 150px; /* or your preferred size */
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
+            <img src="marcorotella.jpeg" alt="Marco Rotella" class="profile-pic">
             <h1>Marco Rotella</h1>
             <h2>Innovation and Technology Manager</h2>
-            <img src="marcorotella.jpeg"Marco Rotella" class="profile-pic">
             <p><a href="https://www.linkedin.com/in/mrotella/" target="_blank">LinkedIn Profile</a></p>
         </div>
     </header>
+
+    <nav>
+        <ul>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#profile">Profile</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#competencies">Competencies</a></li>
+        </ul>
+    </nav>
+
 
     <section class="container">
         <h3>Contact</h3>
