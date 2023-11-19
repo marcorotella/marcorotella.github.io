@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
     background-color: #1e1e1e; /* Dark background similar to IDEs */
     color: #d4d4d4; /* Grey text color for general readability */
-    padding-top: 700px; /* Increase padding-top to push content below fixed header */
+    padding-top: 100px; /* Increase padding-top to push content below fixed header */
 }
 
 /* Header and Navigation Styles */
@@ -25,14 +25,23 @@ header {
     width: 100%;
     z-index: 1000; /* High z-index to ensure header is above other content */
     padding: 10px 0; /* Adjust padding as necessary */
-    border-bottom: 1px solid #3c3c3c; /* Subtle border for the header */
+}
+
+nav {
+    background: #333333; /* Dark background for nav to match the header */
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    top: 50px; /* Positioned below the header */
+    width: 100%;
+    z-index: 999; /* Slightly lower z-index than header, but above other content */
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    padding: 0; /* Remove padding */
+    padding: 0;
 }
 
 nav ul li {
@@ -44,7 +53,6 @@ nav ul li a {
     text-decoration: none;
     text-transform: uppercase;
     padding: 5px; /* Add padding for better touch target */
-    border-radius: 3px; /* Rounded borders for aesthetics */
 }
 
 nav ul li a:hover, nav ul li a:focus {
@@ -52,28 +60,16 @@ nav ul li a:hover, nav ul li a:focus {
     outline: none; /* Remove outline to adhere to the theme */
 }
 
-/* Hero Section Styles */
-#hero {
-    background: #252526; /* Darker background for hero section */
-    padding: 40px;
-    text-align: center;
-}
-
-#hero h1 {
-    margin-bottom: 10px;
-    font-size: 40px;
-    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
-}
-
 /* Section Styles */
 section {
     padding: 20px;
-    margin: 40px 0; /* Increased margin to account for navigation */
+    margin: 80px 0 0; /* Increased top margin to account for fixed nav */
     background-color: #2d2d2d; /* Slightly lighter section backgrounds to differentiate from body */
     border-radius: 5px; /* Optional: rounded corners for sections */
 }
 
-section h3 {
+/* Adjust heading colors for readability */
+h1, h2, h3, h4, a, p {
     color: #dcdcaa; /* Yellow color similar to IDE headings */
 }
 
