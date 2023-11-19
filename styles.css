@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
     background-color: #1e1e1e; /* Dark background similar to IDEs */
     color: #d4d4d4; /* Grey text color for general readability */
-    padding-top: 60px; /* Increased to accommodate fixed header */
+    padding-top: 100px; /* Increase padding-top to push content below fixed header */
 }
 
 /* Header and Navigation Styles */
@@ -23,7 +23,7 @@ header {
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1000; /* High z-index to ensure header is above other content */
     padding: 10px 0; /* Adjust padding as necessary */
     border-bottom: 1px solid #3c3c3c; /* Subtle border for the header */
 }
@@ -68,7 +68,7 @@ nav ul li a:hover, nav ul li a:focus {
 /* Section Styles */
 section {
     padding: 20px;
-    margin: 20px 0;
+    margin: 40px 0; /* Increased margin to account for navigation */
     background-color: #2d2d2d; /* Slightly lighter section backgrounds to differentiate from body */
     border-radius: 5px; /* Optional: rounded corners for sections */
 }
@@ -94,6 +94,7 @@ footer {
     left: 0;
     right: 0;
     width: 100%;
+    z-index: 1000; /* Ensure footer is above other content */
 }
 
 /* Responsive Styles */
