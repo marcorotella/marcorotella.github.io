@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
     background-color: #1e1e1e; /* Dark background similar to IDEs */
     color: #d4d4d4; /* Grey text color for general readability */
-    padding-top: 100px; /* Increase padding-top to push content below fixed header */
+    padding-top: 1000px; /* Increase padding-top to push content below fixed header */
 }
 
 /* Header and Navigation Styles */
