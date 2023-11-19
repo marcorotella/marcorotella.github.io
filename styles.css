@@ -1,5 +1,5 @@
 /* Reset some basic elements */
-body, h1, h2, p, ul, li {
+body, h1, h2, h3, h4, p, ul, li {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
     background-color: #1e1e1e; /* Dark background similar to IDEs */
     color: #d4d4d4; /* Grey text color for general readability */
-    padding-top: 50px;
+    padding-top: 60px; /* Increased to accommodate fixed header */
 }
 
 /* Header and Navigation Styles */
@@ -20,6 +20,8 @@ header {
     color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
     position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     z-index: 1000;
     padding: 10px 0; /* Adjust padding as necessary */
@@ -71,9 +73,13 @@ section {
     border-radius: 5px; /* Optional: rounded corners for sections */
 }
 
+section h3 {
+    color: #dcdcaa; /* Yellow color similar to IDE headings */
+}
+
 /* Contact Section Styles */
-#contact a {
-    color: #4EC9B0; /* Bright color for links, resembling terminal links */
+#contact a, #contact p {
+    color: #ce9178; /* Salmon color for contrast against dark background */
     text-decoration: none;
 }
 
@@ -85,6 +91,8 @@ footer {
     padding: 10px;
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
 }
 
