@@ -7,34 +7,35 @@ body, h1, h2, h3, h4, p, ul, li {
 
 /* Basic styling */
 body {
-    font-family: 'Courier New', Courier, monospace; /* Monospace font similar to terminal */
+    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
-    background-color: #1e1e1e; /* Dark background similar to IDEs */
-    color: #d4d4d4; /* Grey text color for general readability */
-    padding-top: 1000px; /* Increase padding-top to push content below fixed header */
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding-top: 140px; /* Adjusted to push the content below the header and nav */
+    padding-bottom: 40px; /* Space for the footer */
 }
 
 /* Header and Navigation Styles */
 header {
-    background: #252526; /* Darker background for header */
-    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
+    background: #252526;
+    color: #9CDCFE;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
-    z-index: 1000; /* High z-index to ensure header is above other content */
-    padding: 10px 0; /* Adjust padding as necessary */
+    z-index: 1030; /* Ensuring this is above the nav */
+    padding: 10px 0;
 }
 
 nav {
-    background: #333333; /* Dark background for nav to match the header */
+    background: #333333;
     color: #fff;
-    padding: 10px 0;
     position: fixed;
-    top: 50px; /* Positioned below the header */
-    width: 100%;
-    z-index: 999; /* Slightly lower z-index than header, but above other content */
+    top: 60px; /* Position below the header */
+    left: 0;
+    right: 0;
+    z-index: 1020;
+    padding: 10px 0;
 }
 
 nav ul {
@@ -42,6 +43,7 @@ nav ul {
     display: flex;
     justify-content: center;
     padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -49,48 +51,42 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
+    color: #9CDCFE;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 5px; /* Add padding for better touch target */
+    padding: 5px;
 }
 
 nav ul li a:hover, nav ul li a:focus {
-    background-color: #3c3c3c; /* Subtle background color on hover/focus */
-    outline: none; /* Remove outline to adhere to the theme */
+    background-color: #3c3c3c;
+    outline: none;
 }
 
 /* Section Styles */
 section {
     padding: 20px;
-    margin: 80px 0 0; /* Increased top margin to account for fixed nav */
-    background-color: #2d2d2d; /* Slightly lighter section backgrounds to differentiate from body */
-    border-radius: 5px; /* Optional: rounded corners for sections */
-}
-
-/* Adjust heading colors for readability */
-h1, h2, h3, h4, a, p {
-    color: #dcdcaa; /* Yellow color similar to IDE headings */
+    margin: 20px 0;
+    background-color: #2d2d2d;
+    border-radius: 5px;
 }
 
 /* Contact Section Styles */
 #contact a, #contact p {
-    color: #ce9178; /* Salmon color for contrast against dark background */
+    color: #ce9178;
     text-decoration: none;
 }
 
 /* Footer Styles */
 footer {
-    background: #252526; /* Darker background for footer */
-    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
+    background: #252526;
+    color: #9CDCFE;
     text-align: center;
     padding: 10px;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure footer is above other content */
+    z-index: 1010; /* Ensuring this is above other content but below the header/nav */
 }
 
 /* Responsive Styles */
@@ -99,9 +95,9 @@ footer {
         flex-direction: column;
     }
     nav ul li {
-        margin: 10px;
+        margin-bottom: 10px;
     }
     nav ul li a {
-        display: block; /* Make links block-level for better touch targets on mobile */
+        display: block;
     }
 }
