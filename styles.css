@@ -1,31 +1,36 @@
 /* Reset some basic elements */
-body, h1, h2, p, ul {
+body, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 /* Basic styling */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font similar to terminal */
     line-height: 1.6;
-    color: #333;
+    background-color: #1e1e1e; /* Dark background similar to IDEs */
+    color: #d4d4d4; /* Grey text color for general readability */
     padding-top: 50px;
 }
 
 /* Header and Navigation Styles */
 header {
-    background: #333;
-    color: #fff;
+    background: #252526; /* Darker background for header */
+    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+    padding: 10px 0; /* Adjust padding as necessary */
+    border-bottom: 1px solid #3c3c3c; /* Subtle border for the header */
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
+    padding: 0; /* Remove padding */
 }
 
 nav ul li {
@@ -33,14 +38,21 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
     text-decoration: none;
     text-transform: uppercase;
+    padding: 5px; /* Add padding for better touch target */
+    border-radius: 3px; /* Rounded borders for aesthetics */
+}
+
+nav ul li a:hover, nav ul li a:focus {
+    background-color: #3c3c3c; /* Subtle background color on hover/focus */
+    outline: none; /* Remove outline to adhere to the theme */
 }
 
 /* Hero Section Styles */
 #hero {
-    background: #f4f4f4;
+    background: #252526; /* Darker background for hero section */
     padding: 40px;
     text-align: center;
 }
@@ -48,24 +60,27 @@ nav ul li a {
 #hero h1 {
     margin-bottom: 10px;
     font-size: 40px;
+    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
 }
 
 /* Section Styles */
 section {
     padding: 20px;
     margin: 20px 0;
+    background-color: #2d2d2d; /* Slightly lighter section backgrounds to differentiate from body */
+    border-radius: 5px; /* Optional: rounded corners for sections */
 }
 
 /* Contact Section Styles */
 #contact a {
-    color: #333;
+    color: #4EC9B0; /* Bright color for links, resembling terminal links */
     text-decoration: none;
 }
 
 /* Footer Styles */
 footer {
-    background: #333;
-    color: #fff;
+    background: #252526; /* Darker background for footer */
+    color: #9CDCFE; /* Light blue color similar to syntax highlighting in IDE */
     text-align: center;
     padding: 10px;
     position: fixed;
@@ -80,5 +95,8 @@ footer {
     }
     nav ul li {
         margin: 10px;
+    }
+    nav ul li a {
+        display: block; /* Make links block-level for better touch targets on mobile */
     }
 }
