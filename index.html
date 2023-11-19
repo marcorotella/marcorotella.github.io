@@ -5,104 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marco Rotella - Resume</title>
     <style>
-        /* Inline CSS for demonstration */
-        body, h1, h2, h3, p, ul, li, a {
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            text-decoration: none;
         }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            padding-top: 50px;
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
         }
-
         header {
             background: #333;
-            color: white;
-            padding: 10px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            color: #fff;
+            padding: 20px 0;
+            border-bottom: #e8491d 3px solid;
         }
-
-        nav ul {
-            list-style-type: none;
+        header h1, header h2 {
+            margin: 0;
             padding: 0;
-            text-align: center;
         }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+        section {
+            padding: 20px 0;
         }
-
-        nav a {
-            color: white;
-            font-weight: bold;
+        h3 {
+            color: #333;
         }
-
-        .hero {
-            background-color: #e7e7e7;
-            padding: 50px 20px;
-            text-align: center;
+        a {
+            color: #e8491d;
+            text-decoration: none;
         }
-
-        .content-section {
-            padding: 20px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>Marco Rotella</h1>
+            <h2>Innovation and Technology Manager</h2>
+        </div>
     </header>
 
-    <div class="hero">
-        <h1>Marco Rotella</h1>
-        <p>Innovation and Technology Manager</p>
-    </div>
+    <section class="container">
+        <h3>Contact</h3>
+        <p>Mobile: 3495024632</p>
+        <p>Email: <a href="mailto:marco.rotella@gmail.com">marco.rotella@gmail.com</a></p>
 
-    <section id="about" class="content-section">
-        <h2>About Me</h2>
-        <p>
-            Experienced Innovation and Technology Manager with a demonstrated history of working in the automotive industry and IT management. Skilled in project inception, technical analysis, and bringing IT infrastructures up to modern standards. Proven ability to lead software development and automation teams, with a focus on Industry 4.0 advancements. Adept at managing technical aspects of funded projects, from drafting proposals to overseeing execution and technical management.
-        </p>
-    </section>
+        <h3>Profile</h3>
+        <p>Experienced Innovation and Technology Manager with a demonstrated history of working in the automotive industry and IT management. Skilled in project inception, technical analysis, and bringing IT infrastructures up to modern standards. Proven ability to lead software development and automation teams, with a focus on Industry 4.0 advancements. Adept at managing technical aspects of funded projects, from drafting proposals to overseeing execution and technical management.</p>
 
-    <section id="experience" class="content-section">
-        <h2>Professional Experience</h2>
-        <div>
-            <h3>Site Operations Manager - REI Lab s.r.l. (2020 - 2022)</h3>
-            <p>Managed a new e-powertrain testing lab from the ground up, overseeing facility requirements, IT infrastructure setup, and project management.</p>
-        </div>
-        <!-- Repeat for each experience entry -->
-    </section>
-
-    <section id="education" class="content-section">
-        <h2>Education & Certifications</h2>
+        <h3>Education</h3>
         <p>High School Diploma in Electronics and Telecommunications</p>
+
+        <h3>Certifications and Training</h3>
         <ul>
             <li>Network Administration</li>
             <li>Linux Server Administration</li>
@@ -110,25 +68,96 @@
             <li>Cloud Platform and Services</li>
             <li>Terraform</li>
         </ul>
-    </section>
 
-    <section id="skills" class="content-section">
-        <h2>Skills</h2>
+        <h3>Professional Experience</h3>
+        <h4>Site Operations Manager @ REI Lab s.r.l. (2020 - 2022)</h4>
+        <p>Managed a new e-powertrain testing lab from the ground up, overseeing facility requirements, IT infrastructure setup, and project management.</p>
+
+        <h4>Innovation & Technology Manager @ REI Lab s.r.l. (2021 - Present)</h4>
+        <p>Charged with the company's digitalization program, aiming to create a truly digital enterprise. Lead software requirement specification and product management for lab management and testing/measurement software.</p>
+
+        <h4>Automation and Software Development Department Manager @ AVL Italy (2018 - 2020)</h4>
+        <p>Led a department responsible for agile project management, technology scouting, and product development for e-powertrain testing software.</p>
+
+        <h4>Technical Trainer @ AVL Italy (2012 - 2018)</h4>
+        <p>Conducted customer and internal trainings, workshops, and supported team ramp-up processes.</p>
+
+        <h4>Application Engineer @ AVL Italy (2012 - 2018)</h4>
+        <p>Provided gap analysis, architecture analysis, requirement specifications, and led software deployment across various countries.</p>
+
+        <h4>Test Field Migration and Standardization Lead Engineer @ AVL Italy (2011 - 2014)</h4>
+        <p>Led gap analysis, architecture analysis, and was the deployment lead engineer for migration and harmonization projects internationally.</p>
+
+        <h4>Commissioning & Service Engineer @ AVL Italy (2009 - 2021)</h4>
+        <p>Handled engine testbed commissioning, dynamometer commissionings, and provided field service.</p>
+
+        <h4>Junior System and Network Administrator @ CS s.r.l. (2007 - 2009)</h4>
+        <p>Started career in IT with responsibilities in system and network administration.</p>
+
+        <h3>Key Projects</h3>
+        <ul>
+            <li>REINOVA: Provided expertise in testing & measurement systems and IT, contributing to a year-over-year turnover increase of 50-100% until 2023.</li>
+            <li>e-Powertrain Testing Software: Led the inception, requirement specification, and product management, including building a development team from scratch.</li>
+            <li>Global Migration & Standardization Program: Engaged in a large-scale program for a major Automotive OEM, contributing testing & measurement systems expertise and IT knowledge.</li>
+        </ul>
+
+        <h3>Skills</h3>
+        <ul>
+            <li>Project Management</li>
+            <li>IT Infrastructure Development</li>
+            <li>Software Development</li>
+            <li>Automation</li>
+            <li>Cloud Computing</li>
+            <li>Networking</li>
+            <li>Linux Administration</li>
+            <li>Business Intelligence</li>
+            <li>Industry 4.0 Technologies</li>
+            <li>Funded Project Management</li>
+        </ul>
+
+        <h3>Technical Competencies</h3>
+        <h4>Enterprise Resource Planning and Business Management</h4>
         <ul>
             <li>Odoo</li>
             <li>Requirements specifications</li>
-            <!-- Add all skills here -->
+            <li>Business intelligence</li>
+            <li>MS365 (SharePoint, Teams, etc.)</li>
+            <li>Process Digitalization</li>
+            <li>Automation software specifications & product management</li>
+        </ul>
+
+        <h4>Cloud and Infrastructure Management</h4>
+        <ul>
+            <li>Terraform</li>
+            <li>Proxmox</li>
+            <li>Cloud management</li>
+            <li>Docker</li>
+            <li>Linux administration</li>
+            <li>Ansible</li>
+        </ul>
+
+        <h4>Network and Security</h4>
+        <ul>
+            <li>External integrations</li>
+            <li>Network administration</li>
+            <li>Endpoint protection</li>
+            <li>DNS</li>
+            <li>Firewall (pfSense, FortiGate)</li>
+            <li>ISO 27001/9001/Tisax</li>
+        </ul>
+
+        <h4>Device and Application Management</h4>
+        <ul>
+            <li>Intune</li>
+            <li>SoftPLC (TwinCAT)</li>
+            <li>IT/OT projects</li>
+        </ul>
+
+        <h4>Specialized Software and Automation</h4>
+        <ul>
+            <li>Automotive testing automation</li>
+            <li>Data management</li>
         </ul>
     </section>
-
-    <section id="contact" class="content-section">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:marco.rotella@gmail.com">marco.rotella@gmail.com</a></p>
-        <p>Mobile: 3495024632</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2023 Marco Rotella</p>
-    </footer>
 </body>
 </html>
