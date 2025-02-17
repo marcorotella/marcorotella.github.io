@@ -1,0 +1,26 @@
+---
+title: Welcome to my blog
+date: 2025-02-17 15:00:00 +0100
+categories: [generic]
+tags: [generic]     # TAG names should always be lowercase
+---
+# Welcome to my blog
+
+![Desktop View](/assets/img/welcome.jpeg){: width="350" height="200" }
+
+It's been a long time since I first thought about opening a blog, and here we are.
+
+This blog will be all about IT, Tech, and Automation. It serves as a personal online note, how-to guide, and project repository for me, and a resource for you, hoping to help the community find ideas, instructions, and maybe inspiration from my experience.
+
+The topics I will cover may vary, as I am interested in different matters. To give you a little bit of context, these are the topics I hope to cover in the foreseeable future:
+
+- Virtualization (Proxmox, Proxmox Backup Server)
+- Storage (Ceph, ZFS, LVM, NAS, etc.)
+- Networking (Fortigate, Unifi, Cisco, Mikrotik, generic networking topics)
+- Automation (Twincat, ADS, IPCs, System Integration, Open Source Automation platforms, Ethercat, MQTT, etc.)
+- Linux in general
+- Containerization (Docker, Rancher, Portainer, k3s, etc.)
+- Hardware (Servers, Networking Gear)
+- Home Lab (all around)
+
+That's all for the time being. See you soon!

@@ -9,8 +9,6 @@ order: 4
 
 ## About Me
 
-About Me
-
 I am Marco Rotella, a dynamic and experienced Chief Digital Officer with 17 years of expertise in driving innovation in digital transformation, testing automation, and IT management. My career has been marked by a strong proficiency in network infrastructure, automation, and system integration, fostering cross-functional teams to enhance operational efficiency and deliver cutting-edge solutions. I excel in leveraging technologies to advance business objectives by building software, infrastructures, and tools tailored to the needs.
 
 Throughout my career, I have held several key positions, including Chief Digital Officer at Reinova S.p.a.. In this role, I develop and implement a comprehensive digital strategy that aligns with the company's overall goals. I drive digital innovation by adopting new technologies and practices, ensuring a smooth digital transformation across the organization. I collaborate closely with other departments to integrate digital initiatives with IT and marketing strategies.
