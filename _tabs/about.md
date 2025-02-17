@@ -3,10 +3,6 @@
 icon: fas fa-info-circle
 order: 4
 ---
-
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
-
 ## About Me
 
 I am Marco Rotella, a dynamic and experienced Chief Digital Officer with 17 years of expertise in driving innovation in digital transformation, testing automation, and IT management. My career has been marked by a strong proficiency in network infrastructure, automation, and system integration, fostering cross-functional teams to enhance operational efficiency and deliver cutting-edge solutions. I excel in leveraging technologies to advance business objectives by building software, infrastructures, and tools tailored to the needs.
