@@ -3,10 +3,10 @@ title: Who's really in charge of your firewall?
 date: 2026-09-08 19:00:00 +0200
 categories: [Posts]
 tags: [linux, networking, nftables, firewall, docker, libvirt]     # TAG names should always be lowercase
-image: /assets/img/firewall-who-is-in-charge-social.png
+image:
+  path: /assets/img/firewall-who-is-in-charge-social.png
+  alt: A packet crossing the netfilter pipeline, where prerouting, forward and postrouting each carry rules written by three different owners.
 ---
-
-![Desktop View](/assets/img/firewall-who-is-in-charge-header.svg)
 
 I spent a full day this week inside the firewall of a single Linux box. Not building a new one, not migrating from one thing to another: just trying to understand the one that was already there.
 
