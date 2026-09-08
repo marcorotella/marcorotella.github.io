@@ -5,6 +5,8 @@ categories: [Posts]
 tags: [linux, networking, nftables, firewall, docker, libvirt]     # TAG names should always be lowercase
 image:
   path: /assets/img/firewall-who-is-in-charge-social.png
+  width: 1200
+  height: 630
   alt: A packet crossing the netfilter pipeline, where prerouting, forward and postrouting each carry rules written by three different owners.
 ---
 
