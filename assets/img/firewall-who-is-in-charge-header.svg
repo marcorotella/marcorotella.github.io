@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Banner: a packet crossing the netfilter pipeline, where prerouting, forward and postrouting each carry rules written by three different owners: your own config, Docker and libvirt.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #7c8794; stroke-width: 2; fill: none; }
+    .head{ font: 700 38px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .kick{ font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 2.4px; }
+    .lbl { font: 600 16px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .own1{ fill: #2f6fb2; } .own2{ fill: #0e7f78; } .own3{ fill: #7d55c7; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .own1{ fill: #74aae2; } .own2{ fill: #3fbdb3; } .own3{ fill: #b492f0; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c8794"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1200" height="400"/>
+
+  <text class="kick mut" x="60" y="66">NFTABLES · IPTABLES-NFT · DOCKER · LIBVIRT</text>
+  <text class="head ink" x="60" y="116">Three owners, one packet path</text>
+
+  <!-- legend -->
+  <circle class="own1" cx="836" cy="62" r="6"/><text class="sml mut" x="850" y="67">your rules</text>
+  <circle class="own2" cx="946" cy="62" r="6"/><text class="sml mut" x="960" y="67">docker</text>
+  <circle class="own3" cx="1042" cy="62" r="6"/><text class="sml mut" x="1056" y="67">libvirt</text>
+
+  <!-- rail -->
+  <line class="ln" x1="88" y1="252" x2="204" y2="252" marker-end="url(#ah)"/>
+  <text class="sml mut" x="60" y="230">packet in</text>
+
+  <rect class="box" x="210" y="220" width="170" height="64" rx="10"/>
+  <text class="lbl ink" x="295" y="258" text-anchor="middle">prerouting</text>
+  <circle class="own1" cx="277" cy="306" r="6"/><circle class="own2" cx="295" cy="306" r="6"/>
+
+  <line class="ln" x1="380" y1="252" x2="414" y2="252" marker-end="url(#ah)"/>
+
+  <rect class="box" x="420" y="220" width="170" height="64" rx="10"/>
+  <text class="lbl ink" x="505" y="258" text-anchor="middle">routing</text>
+  <text class="sml mut" x="505" y="308" text-anchor="middle">kernel only</text>
+
+  <line class="ln" x1="590" y1="252" x2="624" y2="252" marker-end="url(#ah)"/>
+
+  <rect class="box" x="630" y="220" width="170" height="64" rx="10"/>
+  <text class="lbl ink" x="715" y="258" text-anchor="middle">forward</text>
+  <circle class="own1" cx="697" cy="306" r="6"/><circle class="own2" cx="715" cy="306" r="6"/><circle class="own3" cx="733" cy="306" r="6"/>
+
+  <line class="ln" x1="800" y1="252" x2="834" y2="252" marker-end="url(#ah)"/>
+
+  <rect class="box" x="840" y="220" width="170" height="64" rx="10"/>
+  <text class="lbl ink" x="925" y="258" text-anchor="middle">postrouting</text>
+  <circle class="own1" cx="907" cy="306" r="6"/><circle class="own2" cx="925" cy="306" r="6"/><circle class="own3" cx="943" cy="306" r="6"/>
+
+  <line class="ln" x1="1010" y1="252" x2="1116" y2="252" marker-end="url(#ah)"/>
+  <text class="sml mut" x="1140" y="230" text-anchor="end">out</text>
+
+  <text class="sml mut" x="60" y="366">every stage carries rules from more than one writer — and none of them asked the others first</text>
+</svg>

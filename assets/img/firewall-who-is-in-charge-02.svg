@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" width="1000" height="660" role="img" aria-label="Diagram: four base chains from three different tables all attach to the forward hook at different priorities. An accept verdict in one chain only means that chain has no objection; the packet continues into the next chain, and any drop along the way ends the journey. Two of the chains share the same priority, so their relative order is not guaranteed.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .band{ fill: none; stroke: #b3bcc7; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .ok  { fill: #ffffff; stroke: #2f6fb2; stroke-width: 2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .red { fill: #c2382e; }
+    .blu { fill: #2f6fb2; }
+    .tea { fill: #0e7f78; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .band{ stroke: #4b5563; }
+      .ok  { fill: #222831; stroke: #74aae2; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .red { fill: #e8695c; }
+      .blu { fill: #74aae2; }
+      .tea { fill: #3fbdb3; }
+    }
+  </style>
+  <defs>
+    <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1000" height="660"/>
+  <text class="ttl ink" x="40" y="44">One hook, four chains — and "accept" is not the end of the story</text>
+  <text class="sml mut" x="40" y="68">a forwarded packet, walking the <tspan class="mono">forward</tspan> hook from the lowest priority upwards</text>
+
+  <!-- chain 1 -->
+  <rect class="box" x="140" y="98" width="720" height="68" rx="10"/>
+  <text class="lbl ink" x="164" y="127">ip bypass_libvirt / forward</text>
+  <text class="mono mut" x="164" y="149">ip daddr &lt;vm&gt; counter accept</text>
+  <text class="sml blu" x="836" y="127" text-anchor="end">priority -10 · yours</text>
+  <text class="sml mut" x="836" y="149" text-anchor="end">verdict: accept</text>
+
+  <line class="ln" x1="500" y1="166" x2="500" y2="208" marker-end="url(#b1)"/>
+  <text class="sml mut" x="516" y="192">accept here just means "no objection", keep walking</text>
+
+  <!-- chain 2 -->
+  <rect class="box" x="140" y="214" width="720" height="68" rx="10"/>
+  <text class="lbl ink" x="164" y="243">inet custom_routing / forward</text>
+  <text class="mono mut" x="164" y="265">ct state new, dport { ... } accept</text>
+  <text class="sml blu" x="836" y="243" text-anchor="end">priority -5 · yours</text>
+  <text class="sml mut" x="836" y="265" text-anchor="end">verdict: accept</text>
+
+  <line class="ln" x1="500" y1="282" x2="500" y2="326" marker-end="url(#b1)"/>
+
+  <!-- same-priority band -->
+  <rect class="band" x="128" y="316" width="744" height="196" rx="12"/>
+  <text class="sml mut" x="872" y="308" text-anchor="end">same priority → relative order not guaranteed</text>
+
+  <!-- chain 3 -->
+  <rect class="box" x="152" y="336" width="696" height="68" rx="10"/>
+  <text class="lbl ink" x="176" y="365">ip filter / FORWARD</text>
+  <text class="mono mut" x="176" y="387">created by docker through iptables-nft</text>
+  <text class="sml tea" x="824" y="365" text-anchor="end">priority 0 · docker</text>
+  <text class="sml red" x="824" y="387" text-anchor="end">policy drop</text>
+
+  <line class="ln" x1="500" y1="404" x2="500" y2="440" marker-end="url(#b1)"/>
+
+  <!-- chain 4 -->
+  <rect class="box" x="152" y="440" width="696" height="68" rx="10"/>
+  <text class="lbl ink" x="176" y="469">inet filter / forward</text>
+  <text class="mono mut" x="176" y="491">your baseline posture</text>
+  <text class="sml blu" x="824" y="469" text-anchor="end">priority 0 · yours</text>
+  <text class="sml red" x="824" y="491" text-anchor="end">policy drop</text>
+
+  <line class="ln" x1="500" y1="512" x2="500" y2="552" marker-end="url(#b1)"/>
+
+  <!-- outcome -->
+  <rect class="ok" x="330" y="558" width="340" height="56" rx="10"/>
+  <text class="lbl ink" x="500" y="592" text-anchor="middle">survived all four → forwarded</text>
+
+  <text class="sml mut" x="40" y="646">Only drop or reject ends the trip. Everything else keeps the packet walking — one hostile chain anywhere on the path is enough.</text>
+</svg>

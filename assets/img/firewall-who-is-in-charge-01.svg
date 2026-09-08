@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 540" width="1080" height="540" role="img" aria-label="Diagram: a packet hits the prerouting NAT stage before the kernel makes its routing decision, so a DNAT rule rewrites the destination and the packet takes the forward branch towards a VM. The input branch, and the accept rule for the local service on the same port, are never reached.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .dim { fill: #ffffff; stroke: #c9d0d8; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .dead{ stroke: #c2382e; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+    .red { fill: #c2382e; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .dim { fill: #1d2229; stroke: #3a434e; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .dead{ stroke: #e8695c; }
+      .red { fill: #e8695c; }
+    }
+  </style>
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2382e"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="540"/>
+  <text class="ttl ink" x="40" y="46">NAT runs before the kernel asks "is this packet for me?"</text>
+
+  <!-- ingress -->
+  <text class="sml mut" x="40" y="266">packet on</text>
+  <text class="mono mut" x="40" y="286">eno1 :3389</text>
+  <line class="ln" x1="150" y1="272" x2="188" y2="272" marker-end="url(#a1)"/>
+
+  <!-- prerouting -->
+  <rect class="box" x="195" y="237" width="200" height="72" rx="10"/>
+  <text class="lbl ink" x="295" y="269" text-anchor="middle">prerouting</text>
+  <text class="sml mut" x="295" y="291" text-anchor="middle">nat: DNAT rewrites dst</text>
+
+  <line class="ln" x1="395" y1="272" x2="440" y2="272" marker-end="url(#a1)"/>
+
+  <!-- routing decision -->
+  <polygon class="box" points="512,214 578,272 512,330 446,272"/>
+  <text class="lbl ink" x="512" y="270" text-anchor="middle">routing</text>
+  <text class="sml mut" x="512" y="288" text-anchor="middle">decision</text>
+
+  <!-- input branch (dead) -->
+  <path class="dead" d="M512,214 L512,148 L636,148" marker-end="url(#a2)"/>
+  <rect class="dim" x="645" y="116" width="170" height="64" rx="10"/>
+  <text class="lbl mut" x="730" y="145" text-anchor="middle">input</text>
+  <text class="mono mut" x="730" y="165" text-anchor="middle">dport 3389 accept</text>
+
+  <line class="dead" x1="820" y1="148" x2="862" y2="148"/>
+  <rect class="dim" x="875" y="116" width="165" height="64" rx="10"/>
+  <text class="sml mut" x="957" y="142" text-anchor="middle">local service</text>
+  <text class="mono mut" x="957" y="163" text-anchor="middle">xrdp on the host</text>
+
+  <line class="dead" x1="588" y1="128" x2="614" y2="168"/>
+  <line class="dead" x1="614" y1="128" x2="588" y2="168"/>
+  <text class="sml red" x="530" y="110">never reached</text>
+
+  <!-- forward branch (taken) -->
+  <path class="ln" d="M512,330 L512,404 L636,404" marker-end="url(#a1)"/>
+  <rect class="box" x="645" y="372" width="170" height="64" rx="10"/>
+  <text class="lbl ink" x="730" y="401" text-anchor="middle">forward</text>
+  <text class="sml mut" x="730" y="421" text-anchor="middle">then postrouting</text>
+
+  <line class="ln" x1="820" y1="404" x2="862" y2="404" marker-end="url(#a1)"/>
+  <rect class="box" x="875" y="372" width="165" height="64" rx="10"/>
+  <text class="sml ink" x="957" y="399" text-anchor="middle">the VM</text>
+  <text class="mono mut" x="957" y="419" text-anchor="middle">gets the packet</text>
+
+  <text class="sml mut" x="40" y="500">The destination was rewritten before the branch was chosen, so the rule that "opens" the port for the host is dead code.</text>
+</svg>

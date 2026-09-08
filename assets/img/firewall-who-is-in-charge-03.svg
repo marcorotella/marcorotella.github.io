@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 660" width="1080" height="660" role="img" aria-label="Diagram: static config files are loaded into the kernel ruleset with nft -f, while dockerd and libvirtd write their own tables straight into the kernel at runtime and never to a file. A global flush ruleset covers the entire kernel ruleset, including tables you do not own, while the create-then-delete pattern only resets one table at a time.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .pan { fill: #f8fafc; stroke: #b3bcc7; stroke-width: 1.5; }
+    .grp { fill: #ffffff; stroke: #ccd3db; stroke-width: 1.2; }
+    .chip{ fill: #eef1f5; stroke: #ccd3db; stroke-width: 1.2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .scopeA { fill: none; stroke: #c2382e; stroke-width: 2; stroke-dasharray: 7 5; }
+    .scopeB { fill: none; stroke: #2f6fb2; stroke-width: 2; stroke-dasharray: 7 5; }
+    .lnA { stroke: #c2382e; stroke-width: 2; fill: none; }
+    .lnB { stroke: #2f6fb2; stroke-width: 2; fill: none; }
+    .red { fill: #c2382e; }
+    .blu { fill: #2f6fb2; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .hd  { font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 0.6px; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monob{ font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .pan { fill: #1c2128; stroke: #414b57; }
+      .grp { fill: #232932; stroke: #3c4552; }
+      .chip{ fill: #2b323c; stroke: #3c4552; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .scopeA, .lnA { stroke: #e8695c; }
+      .scopeB, .lnB { stroke: #74aae2; }
+      .red { fill: #e8695c; }
+      .blu { fill: #74aae2; }
+    }
+  </style>
+  <defs>
+    <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="cA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2382e"/>
+    </marker>
+    <marker id="cB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2f6fb2"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="660"/>
+  <text class="ttl ink" x="40" y="44">What is on disk is not what is enforced</text>
+
+  <!-- left: disk -->
+  <text class="hd mut" x="40" y="112">ON DISK</text>
+  <rect class="box" x="40" y="126" width="290" height="50" rx="8"/>
+  <text class="mono ink" x="58" y="156">/etc/nftables-bhf.conf</text>
+  <rect class="box" x="40" y="186" width="290" height="50" rx="8"/>
+  <text class="mono ink" x="58" y="216">/etc/nftables.conf.d/*.conf</text>
+  <path class="ln" d="M330,200 L352,200 L352,318 L364,318" marker-end="url(#c1)"/>
+  <text class="sml mut" x="40" y="256">loaded once, at service start</text>
+
+  <text class="hd mut" x="40" y="312">RUNNING DAEMONS</text>
+  <rect class="box" x="40" y="326" width="140" height="50" rx="8"/>
+  <text class="mono ink" x="58" y="356">dockerd</text>
+  <rect class="box" x="190" y="326" width="140" height="50" rx="8"/>
+  <text class="mono ink" x="208" y="356">libvirtd</text>
+  <path class="ln" d="M330,352 L352,352 L352,196 L364,196" marker-end="url(#c1)"/>
+  <text class="sml mut" x="40" y="400">write straight into the kernel,</text>
+  <text class="sml mut" x="40" y="420">continuously, never to a file</text>
+
+  <!-- right: kernel -->
+  <rect class="pan" x="380" y="96" width="660" height="316" rx="12"/>
+  <text class="hd ink" x="404" y="126">LIVE RULESET IN THE KERNEL</text>
+  <text class="sml mut" x="404" y="146">the only thing that is actually enforced</text>
+
+  <rect class="grp" x="400" y="160" width="620" height="102" rx="9"/>
+  <text class="sml mut" x="416" y="182">tables other daemons own</text>
+  <rect class="chip" x="416" y="192" width="296" height="52" rx="7"/>
+  <text class="mono ink" x="432" y="214">ip nat · ip filter · ip mangle</text>
+  <text class="sml mut" x="432" y="234">docker, via iptables-nft</text>
+  <rect class="chip" x="724" y="192" width="280" height="52" rx="7"/>
+  <text class="mono ink" x="740" y="214">LIBVIRT_FWI · LIBVIRT_FWO …</text>
+  <text class="sml mut" x="740" y="234">libvirt, for the VM bridge</text>
+
+  <rect class="grp" x="400" y="278" width="620" height="112" rx="9"/>
+  <text class="sml mut" x="416" y="300">tables you own</text>
+  <rect class="chip" x="416" y="310" width="190" height="62" rx="7"/>
+  <text class="mono ink" x="432" y="334">inet filter</text>
+  <text class="sml mut" x="432" y="356">baseline posture</text>
+  <rect class="chip" x="618" y="310" width="190" height="62" rx="7"/>
+  <text class="mono ink" x="634" y="334">inet</text>
+  <text class="mono ink" x="634" y="352">custom_routing</text>
+  <rect class="chip" x="820" y="310" width="184" height="62" rx="7"/>
+  <text class="mono ink" x="836" y="334">ip</text>
+  <text class="mono ink" x="836" y="352">bypass_libvirt</text>
+
+  <!-- scopes -->
+  <rect class="scopeA" x="370" y="86" width="680" height="336" rx="14"/>
+  <rect class="scopeB" x="390" y="268" width="640" height="132" rx="12"/>
+
+  <!-- options -->
+  <rect class="box" x="40" y="480" width="470" height="120" rx="10"/>
+  <text class="monob red" x="62" y="512">flush ruleset</text>
+  <text class="sml mut" x="62" y="538">one line, and every table in the kernel is gone —</text>
+  <text class="sml mut" x="62" y="558">including the ones Docker and libvirt are relying on</text>
+  <text class="sml red" x="62" y="584">scope: the outer dashed box</text>
+  <path class="lnA" d="M420,480 L420,440 L392,440 L392,424" marker-end="url(#cA)"/>
+
+  <rect class="box" x="546" y="480" width="494" height="120" rx="10"/>
+  <text class="monob blu" x="568" y="512">table inet filter { } ; delete table inet filter</text>
+  <text class="sml mut" x="568" y="538">create-if-missing, then delete: resets exactly one</text>
+  <text class="sml mut" x="568" y="558">table of yours and leaves everyone else alone</text>
+  <text class="sml blu" x="568" y="584">scope: the inner dashed box</text>
+  <path class="lnB" d="M900,480 L900,440 L1010,440 L1010,404" marker-end="url(#cB)"/>
+
+  <text class="sml mut" x="40" y="636">Same intent — "start from a clean slate" — very different blast radius.</text>
+</svg>
