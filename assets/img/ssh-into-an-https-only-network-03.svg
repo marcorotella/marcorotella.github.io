@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 500" width="1080" height="500" role="img" aria-label="Diagram: every inbound TCP connection on port 443 reaches sslh first. It reads the first bytes and routes a TLS ClientHello to Caddy on loopback port 8443 and an SSH protocol banner to sshd on loopback port 22, so one public port serves both the websites and the tunnel.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .key { fill: #ffffff; stroke: #1c7a68; stroke-width: 2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ok  { fill: #1c7a68; }
+    .ln  { stroke: #6f7a87; stroke-width: 2.5; fill: none; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monb{ font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .key { fill: #222831; stroke: #46c2a8; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ok  { fill: #46c2a8; }
+      .ln  { stroke: #8b95a1; }
+    }
+  </style>
+  <defs>
+    <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="500"/>
+  <text class="ttl ink" x="40" y="46">One public port, routed by what the client says first</text>
+
+  <!-- ingress -->
+  <text class="sml mut" x="40" y="232">any inbound TCP</text>
+  <text class="monb ink" x="40" y="254">0.0.0.0:443</text>
+  <line class="ln" x1="178" y1="248" x2="222" y2="248" marker-end="url(#b1)"/>
+
+  <!-- sslh -->
+  <rect class="key" x="230" y="206" width="196" height="84" rx="12"/>
+  <text class="lbl ok" x="328" y="240" text-anchor="middle">sslh</text>
+  <text class="sml mut" x="328" y="264" text-anchor="middle">reads the first bytes</text>
+
+  <!-- branch up: TLS -->
+  <path class="ln" d="M426,232 L512,232 L512,152 L648,152" marker-end="url(#b1)"/>
+  <text class="mono ink" x="580" y="140" text-anchor="middle">TLS ClientHello</text>
+  <rect class="box" x="656" y="118" width="264" height="70" rx="10"/>
+  <text class="monb ink" x="788" y="147" text-anchor="middle">127.0.0.1:8443</text>
+  <text class="sml mut" x="788" y="169" text-anchor="middle">Caddy — terminates TLS, serves the sites</text>
+
+  <!-- branch down: SSH -->
+  <path class="ln" d="M426,264 L512,264 L512,346 L648,346" marker-end="url(#b1)"/>
+  <text class="mono ink" x="580" y="336" text-anchor="middle">SSH-2.0 banner</text>
+  <rect class="box" x="656" y="312" width="264" height="70" rx="10"/>
+  <text class="monb ink" x="788" y="341" text-anchor="middle">127.0.0.1:22</text>
+  <text class="sml mut" x="788" y="363" text-anchor="middle">sshd — key auth, carries the tunnel</text>
+
+  <text class="sml mut" x="40" y="440">sslh authenticates nothing of its own: it only decides which local daemon gets the socket, and each of those keeps its own front door.</text>
+  <text class="sml mut" x="40" y="464">443/UDP is untouched — sslh is TCP only, so QUIC still goes straight to the proxy as before.</text>
+</svg>

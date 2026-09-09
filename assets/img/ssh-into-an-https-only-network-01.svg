@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" width="1080" height="520" role="img" aria-label="Diagram: on a logarithmic port axis, the range my home router can forward inbound (8192 to 16383, the quarter of the port space my ISP assigned me on a shared IPv4 address) and the ports the restricted network allows outbound (80 and 443) sit far apart and never overlap, so no single port satisfies both constraints.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .bar { fill: #ffffff; stroke: #c9d0d8; stroke-width: 1.5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .tick{ stroke: #b3bcc7; stroke-width: 1.5; }
+    .hit { fill: #c2382e; }
+    .red { fill: #c2382e; }
+    .redl{ stroke: #c2382e; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monb{ font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .bar { fill: #1d2229; stroke: #3a434e; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .tick{ stroke: #4a545f; }
+      .hit { fill: #e8695c; }
+      .red { fill: #e8695c; }
+      .redl{ stroke: #e8695c; }
+    }
+  </style>
+
+  <rect class="g" x="0" y="0" width="1080" height="520"/>
+  <text class="ttl ink" x="40" y="46">Two constraints on the same 16 bits of port number</text>
+
+  <!-- track 1: home router -->
+  <text class="lbl ink" x="40" y="118">ports my home router will forward inbound</text>
+  <rect class="bar" x="140" y="132" width="860" height="30" rx="6"/>
+  <rect class="hit" x="839" y="132" width="54" height="30" rx="6"/>
+  <text class="monb hit" x="866" y="124" text-anchor="middle">8192–16383</text>
+  <text class="sml mut" x="140" y="186">my quarter of a shared IPv4 address (MAP-E) — inside it, forwarding works normally</text>
+
+  <!-- track 2: restricted network -->
+  <text class="lbl ink" x="40" y="248">ports the restricted network lets out</text>
+  <rect class="bar" x="140" y="262" width="860" height="30" rx="6"/>
+  <rect class="hit" x="478" y="262" width="5" height="30"/>
+  <rect class="hit" x="610" y="262" width="5" height="30"/>
+  <text class="monb hit" x="480" y="254" text-anchor="middle">80</text>
+  <text class="monb hit" x="613" y="254" text-anchor="middle">443</text>
+  <text class="sml mut" x="140" y="316" >everything else: timeout, no reset, no message</text>
+
+  <!-- projections onto the axis: the two allowed regions never line up -->
+  <line class="redl" x1="866" y1="162" x2="866" y2="352"/>
+  <line class="redl" x1="480" y1="292" x2="480" y2="352"/>
+  <line class="redl" x1="613" y1="292" x2="613" y2="352"/>
+
+  <!-- axis -->
+  <line class="ln" x1="140" y1="360" x2="1000" y2="360"/>
+  <line class="tick" x1="140"   y1="356" x2="140"   y2="368"/>
+  <line class="tick" x1="318.6" y1="356" x2="318.6" y2="368"/>
+  <line class="tick" x1="497.2" y1="356" x2="497.2" y2="368"/>
+  <line class="tick" x1="675.9" y1="356" x2="675.9" y2="368"/>
+  <line class="tick" x1="854.5" y1="356" x2="854.5" y2="368"/>
+  <line class="tick" x1="1000"  y1="356" x2="1000"  y2="368"/>
+  <text class="mono mut" x="140"   y="388" text-anchor="middle">1</text>
+  <text class="mono mut" x="318.6" y="388" text-anchor="middle">10</text>
+  <text class="mono mut" x="497.2" y="388" text-anchor="middle">100</text>
+  <text class="mono mut" x="675.9" y="388" text-anchor="middle">1k</text>
+  <text class="mono mut" x="854.5" y="388" text-anchor="middle">10k</text>
+  <text class="mono mut" x="1000"  y="388" text-anchor="middle">65k</text>
+  <text class="sml mut" x="40" y="364">port (log)</text>
+
+  <!-- verdict -->
+  <rect class="box" x="140" y="418" width="860" height="52" rx="10"/>
+  <text class="lbl red" x="170" y="450">intersection: empty</text>
+  <text class="sml mut" x="330" y="450">no single port is both forwardable at my end and reachable outbound from theirs</text>
+</svg>

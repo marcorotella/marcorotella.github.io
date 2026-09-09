@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="1080" height="560" role="img" aria-label="Diagram: my laptop and the machine on the restricted network both open outbound SSH connections to a VPS with a stable public IP, one on port 22 and one on port 443. Neither end exposes an inbound port. The forwarded port lands on the VPS loopback interface, and a second hop from the laptop reaches it, forming one end to end session.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .inn { fill: #f3f5f8; stroke: #c9d0d8; stroke-width: 1.5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2.5; fill: none; }
+    .path{ stroke: #1c7a68; stroke-width: 2; fill: none; stroke-dasharray: 7 5; }
+    .ok  { fill: #1c7a68; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monb{ font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .inn { fill: #1a1f26; stroke: #3a434e; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .path{ stroke: #46c2a8; }
+      .ok  { fill: #46c2a8; }
+    }
+  </style>
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1c7a68"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="560"/>
+  <text class="ttl ink" x="40" y="46">Nobody listens; both sides dial out and meet in the middle</text>
+
+  <!-- laptop -->
+  <rect class="box" x="40" y="206" width="212" height="86" rx="12"/>
+  <text class="lbl ink" x="146" y="242" text-anchor="middle">my laptop</text>
+  <text class="sml mut" x="146" y="264" text-anchor="middle">home network, no limits</text>
+  <text class="sml mut" x="146" y="320" text-anchor="middle">no inbound port open</text>
+
+  <!-- vps -->
+  <rect class="box" x="410" y="150" width="260" height="250" rx="12"/>
+  <text class="lbl ink" x="540" y="184" text-anchor="middle">VPS</text>
+  <text class="sml mut" x="540" y="204" text-anchor="middle">stable public IP</text>
+  <rect class="inn" x="432" y="222" width="98" height="42" rx="8"/>
+  <text class="monb ink" x="481" y="249" text-anchor="middle">:22</text>
+  <rect class="inn" x="550" y="222" width="98" height="42" rx="8"/>
+  <text class="monb ink" x="599" y="249" text-anchor="middle">:443</text>
+  <rect class="inn" x="432" y="296" width="216" height="66" rx="8"/>
+  <text class="monb ok" x="540" y="322" text-anchor="middle">127.0.0.1:12222</text>
+  <text class="sml mut" x="540" y="344" text-anchor="middle">loopback only — GatewayPorts no</text>
+
+  <!-- remote -->
+  <rect class="box" x="828" y="206" width="212" height="86" rx="12"/>
+  <text class="lbl ink" x="934" y="236" text-anchor="middle">the far machine</text>
+  <text class="sml mut" x="934" y="258" text-anchor="middle">restricted network,</text>
+  <text class="sml mut" x="934" y="276" text-anchor="middle">outbound 80/443 only</text>
+  <text class="sml mut" x="934" y="320" text-anchor="middle">no inbound port open</text>
+
+  <!-- outbound arrows, both pointing into the VPS -->
+  <line class="ln" x1="252" y1="243" x2="402" y2="243" marker-end="url(#a1)"/>
+  <text class="mono mut" x="327" y="226" text-anchor="middle">ssh -L … -p 22</text>
+  <text class="sml mut" x="327" y="270" text-anchor="middle">outbound</text>
+
+  <line class="ln" x1="828" y1="243" x2="678" y2="243" marker-end="url(#a1)"/>
+  <text class="mono mut" x="753" y="226" text-anchor="middle">ssh -R … -p 443</text>
+  <text class="sml mut" x="753" y="270" text-anchor="middle">outbound</text>
+
+  <!-- logical end to end path -->
+  <path class="path" d="M62,292 L62,440 L1018,440 L1018,292" marker-end="url(#a2)"/>
+  <text class="sml ok" x="540" y="468" text-anchor="middle">what it feels like from the laptop: one session, <tspan class="mono">ssh -p 12222 localhost</tspan></text>
+
+  <text class="sml mut" x="40" y="534">Neither real endpoint ever accepts a connection. The only machine that accepts anything is the one with a public IP and nothing precious on it.</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Banner: two machines that cannot accept inbound connections both dial out to a small VPS with a stable public IP, one on port 22 and one on port 443, and their tunnels meet there.">
+  <style>
+    .bg   { fill: #12161c; }
+    .edge { fill: none; stroke: #2b333e; stroke-width: 2; }
+    .box  { fill: #1b212a; stroke: #3a4451; stroke-width: 1.5; }
+    .mid  { fill: #1b212a; stroke: #35c1b6; stroke-width: 2; }
+    .ink  { fill: #eaeef4; }
+    .mut  { fill: #98a3b0; }
+    .acc  { fill: #35c1b6; }
+    .ln   { stroke: #7f8b99; stroke-width: 2.5; fill: none; }
+    .rule { stroke: #2b333e; stroke-width: 1; }
+    .head { font: 700 56px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .sub  { font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .kick { font: 700 16px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 3px; }
+    .lbl  { font: 700 20px Menlo, Consolas, monospace; }
+    .sml  { font: 400 15px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .mono { font: 400 15px Menlo, Consolas, monospace; }
+    .foot { font: 400 17px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7f8b99"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="630"/>
+  <rect class="edge" x="1" y="1" width="1198" height="628"/>
+
+  <!-- header block -->
+  <text class="kick mut" x="72" y="98">SSH · REVERSE TUNNEL · SSLH · RENDEZVOUS VPS</text>
+  <text class="head ink" x="72" y="162">SSH into a network that</text>
+  <text class="head ink" x="72" y="216">only lets HTTPS out</text>
+  <text class="sub mut" x="72" y="256">when neither end can accept a connection, both of them dial out</text>
+
+  <line class="rule" x1="72" y1="296" x2="1128" y2="296"/>
+
+  <!-- three nodes -->
+  <rect class="box" x="96" y="358" width="236" height="98" rx="14"/>
+  <text class="lbl ink" x="214" y="399" text-anchor="middle">my laptop</text>
+  <text class="sml mut" x="214" y="425" text-anchor="middle">no inbound port</text>
+
+  <rect class="mid" x="482" y="358" width="236" height="98" rx="14"/>
+  <text class="lbl acc" x="600" y="399" text-anchor="middle">the VPS</text>
+  <text class="sml mut" x="600" y="425" text-anchor="middle">stable public IP</text>
+
+  <rect class="box" x="868" y="358" width="236" height="98" rx="14"/>
+  <text class="lbl ink" x="986" y="399" text-anchor="middle">the far machine</text>
+  <text class="sml mut" x="986" y="425" text-anchor="middle">outbound 443 only</text>
+
+  <!-- converging arrows -->
+  <line class="ln" x1="340" y1="407" x2="472" y2="407" marker-end="url(#ah)"/>
+  <text class="mono mut" x="406" y="385" text-anchor="middle">:22</text>
+  <line class="ln" x1="860" y1="407" x2="728" y2="407" marker-end="url(#ah)"/>
+  <text class="mono mut" x="794" y="385" text-anchor="middle">:443</text>
+
+  <text class="sml mut" x="406" y="486" text-anchor="middle">outbound</text>
+  <text class="sml mut" x="794" y="486" text-anchor="middle">outbound</text>
+
+  <text class="foot mut" x="72" y="572">the only machine accepting connections is the one that was already exposed on purpose</text>
+</svg>
