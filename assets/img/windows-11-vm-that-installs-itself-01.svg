@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" width="1080" height="520" role="img" aria-label="Diagram: one answer file at the root of the installation ISO is ignored by the windowsPE pass, which therefore shows the language, keyboard and product key screens, but the same file is applied in full by the specialize and oobeSystem passes later in the same installation.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .bad { fill: #ffffff; stroke: #b3261e; stroke-width: 2; }
+    .key { fill: #ffffff; stroke: #1c7a68; stroke-width: 2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ok  { fill: #1c7a68; }
+    .no  { fill: #b3261e; }
+    .ln  { stroke: #6f7a87; stroke-width: 2.5; fill: none; }
+    .lok { stroke: #1c7a68; stroke-width: 2.5; fill: none; }
+    .lno { stroke: #b3261e; stroke-width: 2.5; fill: none; stroke-dasharray: 6 5; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monb{ font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .bad { fill: #222831; stroke: #f2857c; }
+      .key { fill: #222831; stroke: #46c2a8; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ok  { fill: #46c2a8; }
+      .no  { fill: #f2857c; }
+      .ln  { stroke: #8b95a1; }
+      .lok { stroke: #46c2a8; }
+      .lno { stroke: #f2857c; }
+    }
+  </style>
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="a1ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1c7a68"/>
+    </marker>
+    <marker id="a1no" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b3261e"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="520"/>
+  <text class="ttl ink" x="40" y="44">One file, two mechanisms — and only one of them was broken</text>
+
+  <!-- phase chain -->
+  <rect class="bad" x="40" y="86" width="222" height="104" rx="12"/>
+  <text class="monb no" x="151" y="120" text-anchor="middle">windowsPE</text>
+  <text class="sml mut" x="151" y="144" text-anchor="middle">language · keyboard</text>
+  <text class="sml mut" x="151" y="164" text-anchor="middle">product key · disk</text>
+
+  <rect class="box" x="296" y="86" width="222" height="104" rx="12"/>
+  <text class="lbl ink" x="407" y="120" text-anchor="middle">image applied</text>
+  <text class="sml mut" x="407" y="144" text-anchor="middle">files land on disk,</text>
+  <text class="sml mut" x="407" y="164" text-anchor="middle">machine reboots</text>
+
+  <rect class="key" x="552" y="86" width="222" height="104" rx="12"/>
+  <text class="monb ok" x="663" y="120" text-anchor="middle">specialize</text>
+  <text class="sml mut" x="663" y="144" text-anchor="middle">computer name,</text>
+  <text class="sml mut" x="663" y="164" text-anchor="middle">machine settings</text>
+
+  <rect class="key" x="808" y="86" width="222" height="104" rx="12"/>
+  <text class="monb ok" x="919" y="120" text-anchor="middle">oobeSystem</text>
+  <text class="sml mut" x="919" y="144" text-anchor="middle">local account, autologon,</text>
+  <text class="sml mut" x="919" y="164" text-anchor="middle">FirstLogonCommands</text>
+
+  <line class="ln" x1="262" y1="138" x2="292" y2="138" marker-end="url(#a1)"/>
+  <line class="ln" x1="518" y1="138" x2="548" y2="138" marker-end="url(#a1)"/>
+  <line class="ln" x1="774" y1="138" x2="804" y2="138" marker-end="url(#a1)"/>
+
+  <!-- verdicts -->
+  <text class="lbl no" x="151" y="218" text-anchor="middle">never applied</text>
+  <text class="sml mut" x="151" y="240" text-anchor="middle">three screens for a human</text>
+  <text class="lbl ok" x="663" y="218" text-anchor="middle">applied in full</text>
+  <text class="lbl ok" x="919" y="218" text-anchor="middle">applied in full</text>
+
+  <!-- the file -->
+  <rect class="box" x="392" y="376" width="296" height="86" rx="12"/>
+  <text class="monb ink" x="540" y="408" text-anchor="middle">autounattend.xml</text>
+  <text class="sml mut" x="540" y="432" text-anchor="middle">at the root of the install ISO</text>
+  <text class="sml mut" x="540" y="450" text-anchor="middle">same SHA256, verified from WinPE</text>
+
+  <path class="lno" d="M392,404 L151,404 L151,268" marker-end="url(#a1no)"/>
+  <path class="lok" d="M688,404 L663,404 L663,268" marker-end="url(#a1ok)"/>
+  <path class="lok" d="M688,430 L919,430 L919,268" marker-end="url(#a1ok)"/>
+
+  <text class="sml mut" x="40" y="500">Not a missing file, not a bad medium, not malformed XML: the same bytes are parsed correctly ten minutes later. Something reads this file; something else refuses to.</text>
+</svg>

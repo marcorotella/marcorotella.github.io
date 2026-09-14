@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="1080" height="560" role="img" aria-label="Diagram comparing two boot orders once the press-any-key prompt has been removed from the ISO. With the CD first, every reboot during the installation boots the CD again and re-runs pe.cmd, wiping the disk it has just installed onto, in a loop. With the disk first, the first boot fails silently on the empty disk and falls through to the CD; every later boot finds a bootable disk and the CD is never tried again.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .band{ fill: #e3e8ee; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .bad { fill: #ffffff; stroke: #b3261e; stroke-width: 2; }
+    .key { fill: #ffffff; stroke: #1c7a68; stroke-width: 2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ok  { fill: #1c7a68; }
+    .no  { fill: #b3261e; }
+    .ln  { stroke: #6f7a87; stroke-width: 2.5; fill: none; }
+    .lno { stroke: #b3261e; stroke-width: 2.5; fill: none; }
+    .lok { stroke: #1c7a68; stroke-width: 2.5; fill: none; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .cap { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monb{ font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .band{ fill: #1e222a; }
+      .box { fill: #222831; stroke: #414b57; }
+      .bad { fill: #222831; stroke: #f2857c; }
+      .key { fill: #222831; stroke: #46c2a8; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ok  { fill: #46c2a8; }
+      .no  { fill: #f2857c; }
+      .ln  { stroke: #8b95a1; }
+      .lno { stroke: #f2857c; }
+      .lok { stroke: #46c2a8; }
+    }
+  </style>
+  <defs>
+    <marker id="d4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="d4no" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b3261e"/>
+    </marker>
+    <marker id="d4ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1c7a68"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="560"/>
+  <text class="ttl ink" x="40" y="44">Remove the prompt and the CD wins every boot, not just the first</text>
+
+  <!-- LEFT: CD first -->
+  <rect class="band" x="40" y="70" width="488" height="410" rx="12"/>
+  <text class="cap no" x="64" y="102">boot order: CD, then disk</text>
+  <text class="sml mut" x="64" y="124">the obvious choice, and a loop</text>
+
+  <rect class="bad" x="64" y="146" width="440" height="58" rx="10"/>
+  <text class="cap ink" x="284" y="172" text-anchor="middle">firmware boots the CD</text>
+  <text class="sml mut" x="284" y="192" text-anchor="middle">no prompt to stop it — efisys_noprompt.bin</text>
+
+  <line class="lno" x1="284" y1="204" x2="284" y2="232" marker-end="url(#d4no)"/>
+
+  <rect class="box" x="64" y="240" width="440" height="58" rx="10"/>
+  <text class="mono ink" x="284" y="266" text-anchor="middle">pe.cmd</text>
+  <text class="sml mut" x="284" y="286" text-anchor="middle">partitions, formats, applies the image</text>
+
+  <line class="lno" x1="284" y1="298" x2="284" y2="326" marker-end="url(#d4no)"/>
+
+  <rect class="box" x="64" y="334" width="440" height="58" rx="10"/>
+  <text class="cap ink" x="284" y="360" text-anchor="middle">reboot, halfway through specialize</text>
+  <text class="sml mut" x="284" y="380" text-anchor="middle">as the installation is designed to do</text>
+
+  <path class="lno" d="M504,363 L522,363 L522,175 L510,175" marker-end="url(#d4no)"/>
+  <text class="cap no" x="284" y="424" text-anchor="middle">and round again, from zero</text>
+  <text class="sml mut" x="284" y="448" text-anchor="middle">looks, from outside, like an install that is</text>
+  <text class="sml mut" x="284" y="466" text-anchor="middle">taking a suspiciously long time</text>
+
+  <!-- RIGHT: disk first -->
+  <rect class="band" x="552" y="70" width="488" height="410" rx="12"/>
+  <text class="cap ok" x="576" y="102">boot order: disk, then CD</text>
+  <text class="sml mut" x="576" y="124">counter-intuitive, and self-correcting</text>
+
+  <rect class="box" x="576" y="146" width="440" height="58" rx="10"/>
+  <text class="cap ink" x="796" y="172" text-anchor="middle">first boot: the disk is empty</text>
+  <text class="mono mut" x="796" y="192" text-anchor="middle">BdsDxe: failed to load Boot000X ... : Not Found</text>
+
+  <line class="lok" x1="796" y1="204" x2="796" y2="232" marker-end="url(#d4ok)"/>
+  <text class="sml mut" x="812" y="224">silent fallback, no prompt</text>
+
+  <rect class="box" x="576" y="240" width="440" height="58" rx="10"/>
+  <text class="cap ink" x="796" y="266" text-anchor="middle">falls through to the CD, installs</text>
+  <text class="sml mut" x="796" y="286" text-anchor="middle">same pe.cmd, same work, once</text>
+
+  <line class="lok" x1="796" y1="298" x2="796" y2="326" marker-end="url(#d4ok)"/>
+
+  <rect class="key" x="576" y="334" width="440" height="58" rx="10"/>
+  <text class="cap ok" x="796" y="360" text-anchor="middle">every later boot: the disk is bootable</text>
+  <text class="sml mut" x="796" y="380" text-anchor="middle">it wins, and the CD is never even tried</text>
+
+  <text class="cap ok" x="796" y="424" text-anchor="middle">specialize and oobeSystem finish</text>
+  <text class="sml mut" x="796" y="448" text-anchor="middle">one ordering change, and every reboot after</text>
+  <text class="sml mut" x="796" y="466" text-anchor="middle">the first does the right thing for free</text>
+
+  <text class="sml mut" x="40" y="526">The firmware&#8217;s &#8220;this device is not bootable, next&#8221; is a different mechanism from the Windows bootloader&#8217;s &#8220;press any key&#8221; gate — and it needs nobody to be watching.</text>
+</svg>

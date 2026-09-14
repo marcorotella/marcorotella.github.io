@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Banner: a Windows 11 VM that installs itself. In Windows 11 24H2 setup.exe hands off to a new engine that ignores the answer file for the first installation phase, so the workaround is to stop calling the graphical installer at all and let a script in WinPE apply the image directly.">
+  <style>
+    .bg   { fill: #12161c; }
+    .edge { fill: none; stroke: #2b333e; stroke-width: 2; }
+    .box  { fill: #1b212a; stroke: #3a4451; stroke-width: 1.5; }
+    .bad  { fill: #1b212a; stroke: #e0736a; stroke-width: 2; }
+    .mid  { fill: #1b212a; stroke: #35c1b6; stroke-width: 2; }
+    .ink  { fill: #eaeef4; }
+    .mut  { fill: #98a3b0; }
+    .acc  { fill: #35c1b6; }
+    .no   { fill: #e0736a; }
+    .ln   { stroke: #7f8b99; stroke-width: 2.5; fill: none; }
+    .lno  { stroke: #e0736a; stroke-width: 2.5; fill: none; stroke-dasharray: 6 5; }
+    .rule { stroke: #2b333e; stroke-width: 1; }
+    .head { font: 700 56px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .sub  { font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .kick { font: 700 16px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 3px; }
+    .lbl  { font: 700 20px Menlo, Consolas, monospace; }
+    .sml  { font: 400 15px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .mono { font: 400 15px Menlo, Consolas, monospace; }
+    .foot { font: 400 17px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="hb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7f8b99"/>
+    </marker>
+    <marker id="hbno" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e0736a"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="630"/>
+  <rect class="edge" x="1" y="1" width="1198" height="628"/>
+
+  <text class="kick mut" x="72" y="98">WINDOWS 11 24H2 · AUTOUNATTEND · WINPE · KVM</text>
+  <text class="head ink" x="72" y="162">A Windows 11 VM</text>
+  <text class="head ink" x="72" y="216">that installs itself</text>
+  <text class="sub mut" x="72" y="256">and the 24H2 change that quietly broke fifteen years of answer files</text>
+
+  <line class="rule" x1="72" y1="296" x2="1128" y2="296"/>
+
+  <!-- the file -->
+  <rect class="box" x="72" y="368" width="252" height="92" rx="14"/>
+  <text class="lbl ink" x="198" y="406" text-anchor="middle">autounattend.xml</text>
+  <text class="sml mut" x="198" y="432" text-anchor="middle">at the root of the ISO</text>
+
+  <!-- ignored by the new engine -->
+  <path class="lno" d="M332,398 L452,398" marker-end="url(#hbno)"/>
+  <text class="mono no" x="392" y="378" text-anchor="middle">ignored</text>
+
+  <rect class="bad" x="460" y="368" width="252" height="92" rx="14"/>
+  <text class="lbl no" x="586" y="406" text-anchor="middle">SetupPrep.exe</text>
+  <text class="sml mut" x="586" y="432" text-anchor="middle">the new engine, three screens</text>
+
+  <!-- the way around -->
+  <path class="ln" d="M198,470 L198,530 L860,530 L860,470" marker-end="url(#hb)"/>
+  <text class="sml mut" x="529" y="554" text-anchor="middle">so don&#8217;t call the installer at all</text>
+
+  <rect class="mid" x="734" y="368" width="252" height="92" rx="14"/>
+  <text class="lbl acc" x="860" y="406" text-anchor="middle">X:\pe.cmd</text>
+  <text class="sml mut" x="860" y="432" text-anchor="middle">dism /Apply-Image, directly</text>
+
+  <text class="foot mut" x="1128" y="404" text-anchor="end">zero clicks,</text>
+  <text class="foot acc" x="1128" y="430" text-anchor="end">14 min 30 s</text>
+</svg>

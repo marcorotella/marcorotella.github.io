@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 600" width="1080" height="600" role="img" aria-label="Diagram comparing two versions of Windows Setup. Before 24H2, setup.exe is the installation engine itself: it follows the documented implicit search order, finds the answer file and skips the graphical screens. From 24H2 on, setup.exe is a stub that hands off to SetupHost.exe and SetupPrep.exe, the new ConX engine, which does not honour the implicit search for the windowsPE pass, so the graphical screens appear; the later passes still read the copy in the Panther folder and work normally.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .band{ fill: #e3e8ee; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .bad { fill: #ffffff; stroke: #b3261e; stroke-width: 2; }
+    .key { fill: #ffffff; stroke: #1c7a68; stroke-width: 2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ok  { fill: #1c7a68; }
+    .no  { fill: #b3261e; }
+    .ln  { stroke: #6f7a87; stroke-width: 2.5; fill: none; }
+    .lno { stroke: #b3261e; stroke-width: 2.5; fill: none; stroke-dasharray: 6 5; }
+    .rule{ stroke: #c3cad3; stroke-width: 1; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .cap { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .monb{ font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .band{ fill: #1e222a; }
+      .box { fill: #222831; stroke: #414b57; }
+      .bad { fill: #222831; stroke: #f2857c; }
+      .key { fill: #222831; stroke: #46c2a8; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ok  { fill: #46c2a8; }
+      .no  { fill: #f2857c; }
+      .ln  { stroke: #8b95a1; }
+      .lno { stroke: #f2857c; }
+      .rule{ stroke: #3a424c; }
+    }
+  </style>
+  <defs>
+    <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="b2no" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b3261e"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="600"/>
+  <text class="ttl ink" x="40" y="44">What 24H2 changed: setup.exe stopped being the installer</text>
+
+  <!-- BEFORE -->
+  <rect class="band" x="40" y="70" width="1000" height="188" rx="12"/>
+  <text class="cap ok" x="64" y="102">Windows 7 · 8.1 · 10 · early 11</text>
+  <text class="sml mut" x="290" y="102">one program, one search, one behaviour — for about fifteen years</text>
+
+  <rect class="key" x="64" y="124" width="218" height="102" rx="10"/>
+  <text class="monb ok" x="173" y="158" text-anchor="middle">setup.exe</text>
+  <text class="sml mut" x="173" y="182" text-anchor="middle">is the installation</text>
+  <text class="sml mut" x="173" y="200" text-anchor="middle">engine itself</text>
+
+  <line class="ln" x1="282" y1="175" x2="336" y2="175" marker-end="url(#b2)"/>
+  <text class="sml mut" x="309" y="160" text-anchor="middle">searches</text>
+
+  <rect class="box" x="344" y="124" width="290" height="102" rx="10"/>
+  <text class="cap ink" x="489" y="156" text-anchor="middle">implicit search order</text>
+  <text class="sml mut" x="489" y="180" text-anchor="middle">registry · Panther · removable media ·</text>
+  <text class="sml mut" x="489" y="198" text-anchor="middle">root of the drive Setup runs from</text>
+
+  <line class="ln" x1="634" y1="175" x2="688" y2="175" marker-end="url(#b2)"/>
+  <text class="sml mut" x="661" y="160" text-anchor="middle">found</text>
+
+  <rect class="key" x="696" y="124" width="320" height="102" rx="10"/>
+  <text class="cap ok" x="856" y="156" text-anchor="middle">windowsPE settings applied</text>
+  <text class="sml mut" x="856" y="180" text-anchor="middle">language, keyboard and product key</text>
+  <text class="sml mut" x="856" y="198" text-anchor="middle">screens never shown</text>
+
+  <line class="rule" x1="40" y1="286" x2="1040" y2="286"/>
+
+  <!-- AFTER -->
+  <rect class="band" x="40" y="308" width="1000" height="234" rx="12"/>
+  <text class="cap no" x="64" y="340">Windows 11 24H2 and later</text>
+  <text class="sml mut" x="290" y="340">same documentation, same answer file, different engine</text>
+
+  <rect class="box" x="64" y="362" width="150" height="88" rx="10"/>
+  <text class="monb ink" x="139" y="394" text-anchor="middle">setup.exe</text>
+  <text class="sml mut" x="139" y="418" text-anchor="middle">a stub: picks</text>
+  <text class="sml mut" x="139" y="436" text-anchor="middle">an engine</text>
+
+  <line class="ln" x1="214" y1="406" x2="256" y2="406" marker-end="url(#b2)"/>
+
+  <rect class="box" x="264" y="362" width="176" height="88" rx="10"/>
+  <text class="monb ink" x="352" y="400" text-anchor="middle">SetupHost.exe</text>
+  <text class="sml mut" x="352" y="424" text-anchor="middle">hands off</text>
+
+  <line class="ln" x1="440" y1="406" x2="482" y2="406" marker-end="url(#b2)"/>
+
+  <rect class="bad" x="490" y="362" width="200" height="88" rx="10"/>
+  <text class="monb no" x="590" y="394" text-anchor="middle">SetupPrep.exe</text>
+  <text class="sml mut" x="590" y="418" text-anchor="middle">the new engine,</text>
+  <text class="sml mut" x="590" y="436" text-anchor="middle">informally &#8220;ConX&#8221;</text>
+
+  <line class="ln" x1="690" y1="406" x2="732" y2="406" marker-end="url(#b2)"/>
+
+  <rect class="bad" x="740" y="362" width="276" height="88" rx="10"/>
+  <text class="cap no" x="878" y="394" text-anchor="middle">the screens appear</text>
+  <text class="sml mut" x="878" y="418" text-anchor="middle">implicit search not honoured</text>
+  <text class="sml mut" x="878" y="436" text-anchor="middle">for the windowsPE pass</text>
+
+  <!-- later passes still fine -->
+  <path class="ln" d="M590,450 L590,496 L740,496" marker-end="url(#b2)"/>
+  <rect class="key" x="748" y="466" width="268" height="60" rx="10"/>
+  <text class="mono ok" x="882" y="492" text-anchor="middle">C:\Windows\Panther\unattend.xml</text>
+  <text class="sml mut" x="882" y="514" text-anchor="middle">later passes still read it, and still work</text>
+
+  <text class="sml mut" x="64" y="500">The half that still works is what</text>
+  <text class="sml mut" x="64" y="518">makes the break so hard to spot.</text>
+
+  <text class="sml mut" x="40" y="578">Not a QEMU, OVMF or q35 quirk: the same behaviour on bare metal. The version number of the thing you are installing is a debugging input.</text>
+</svg>
