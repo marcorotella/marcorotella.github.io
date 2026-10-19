@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" width="1080" height="520" role="img" aria-label="Diagram comparing two ways of getting configuration into a Windows guest. On the left, push: the host sends guest-exec commands, but only after three preconditions are met - the VM is powered on, the guest agent is installed inside Windows, and a virtio-serial channel exists in the domain XML. On the right, pull: the host writes a config-drive ISO with genisoimage, attaches it as a CD-ROM before the VM starts, and Cloudbase-Init reads it at first boot, with no preconditions and no channel back to the host.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .pan { fill: #f6f8fa; stroke: #c9d0d8; stroke-width: 1.5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .acb { fill: #ffffff; stroke: #1a6e7e; stroke-width: 1.5; }
+    .gate{ fill: #ffffff; stroke: #c2382e; stroke-width: 1.4; stroke-dasharray: 5 4; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .rdl { stroke: #c2382e; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+    .acl { stroke: #1a6e7e; stroke-width: 2; fill: none; }
+    .brk { stroke: #c2382e; stroke-width: 1.4; fill: none; }
+    .red { fill: #c2382e; }
+    .acc { fill: #1a6e7e; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sec { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 12.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mnb { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .mns { font: 400 11.5px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .tny { font: 600 11.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .pan { fill: #1b1f25; stroke: #3a434e; }
+      .box { fill: #222831; stroke: #414b57; }
+      .acb { fill: #222831; stroke: #6fc2d4; }
+      .gate{ fill: #222831; stroke: #e8695c; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .rdl { stroke: #e8695c; }
+      .acl { stroke: #6fc2d4; }
+      .brk { stroke: #e8695c; }
+      .red { fill: #e8695c; }
+      .acc { fill: #6fc2d4; }
+    }
+  </style>
+  <defs>
+    <marker id="c2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2382e"/>
+    </marker>
+    <marker id="c3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a6e7e"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="520"/>
+  <text class="ttl ink" x="48" y="44">Two ways to get configuration into a Windows guest</text>
+
+  <!-- ================= LEFT: push ================= -->
+  <rect class="pan" x="48" y="76" width="468" height="392" rx="14"/>
+  <text class="sec ink" x="72" y="108">Push — the host reaches in</text>
+
+  <rect class="box" x="182" y="126" width="200" height="52" rx="10"/>
+  <text class="lbl ink" x="282" y="158" text-anchor="middle">host</text>
+
+  <line class="rdl" x1="282" y1="178" x2="282" y2="326" marker-end="url(#c2)"/>
+
+  <path class="brk" d="M132,196 L124,196 L124,306 L132,306"/>
+  <text class="tny red" transform="rotate(-90 112 251)" x="112" y="251" text-anchor="middle">requires all three</text>
+
+  <rect class="gate" x="137" y="196" width="290" height="30" rx="15"/>
+  <text class="tny ink" x="282" y="215" text-anchor="middle">VM powered on</text>
+
+  <rect class="gate" x="137" y="236" width="290" height="30" rx="15"/>
+  <text class="tny ink" x="282" y="255" text-anchor="middle">guest agent installed in Windows</text>
+
+  <rect class="gate" x="137" y="276" width="290" height="30" rx="15"/>
+  <text class="tny ink" x="282" y="295" text-anchor="middle">virtio-serial channel in the domain XML</text>
+
+  <text class="mns mut" x="296" y="322">guest-exec</text>
+
+  <rect class="box" x="182" y="330" width="200" height="72" rx="10"/>
+  <text class="lbl ink" x="282" y="358" text-anchor="middle">Windows guest</text>
+  <text class="sml mut" x="282" y="380" text-anchor="middle">already booted</text>
+
+  <text class="sml mut" x="72" y="436">Configured after the fact, on a machine that is already</text>
+  <text class="sml mut" x="72" y="454">alive and already half set up by hand.</text>
+
+  <!-- ================= RIGHT: pull ================= -->
+  <rect class="pan" x="564" y="76" width="468" height="392" rx="14"/>
+  <text class="sec ink" x="588" y="108">Pull — the guest goes looking</text>
+
+  <rect class="box" x="698" y="126" width="200" height="52" rx="10"/>
+  <text class="lbl ink" x="798" y="158" text-anchor="middle">host</text>
+
+  <line class="acl" x1="798" y1="178" x2="798" y2="204" marker-end="url(#c3)"/>
+  <text class="mns mut" x="812" y="197">genisoimage</text>
+
+  <rect class="acb" x="674" y="208" width="248" height="62" rx="10"/>
+  <text class="mnb ink" x="798" y="236" text-anchor="middle">config-drive.iso</text>
+  <text class="sml mut" x="798" y="257" text-anchor="middle">volume label config-2</text>
+
+  <line class="acl" x1="798" y1="270" x2="798" y2="326" marker-end="url(#c3)"/>
+  <text class="tny mut" x="812" y="303">attached as a CD-ROM before start</text>
+
+  <rect class="box" x="674" y="330" width="248" height="72" rx="10"/>
+  <text class="lbl ink" x="798" y="356" text-anchor="middle">Windows guest</text>
+  <text class="sml mut" x="798" y="377" text-anchor="middle">Cloudbase-Init reads it at first boot</text>
+  <text class="tny acc" x="798" y="395" text-anchor="middle">before a login screen exists</text>
+
+  <text class="sml mut" x="588" y="436">No agent, no network, no channel back to the host.</text>
+  <text class="sml mut" x="588" y="454">The machine is correct the first time you see it.</text>
+</svg>

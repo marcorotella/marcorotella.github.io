@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 510" width="1080" height="510" role="img" aria-label="Diagram: the snapshot chain drawn twice. As declared by libvirt it runs from the base image win11.qcow2 through the snapshot pre-network-change to the snapshot networking_fixed, which is marked current. On disk only the middle file exists, flattened into a standalone image with no backing file; the base and the good snapshot are both gone, and the domain was booting from the intermediate, pre-fix state.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .hit { fill: #ffffff; stroke: #1f7a5c; stroke-width: 2.5; }
+    .dim { fill: none; stroke: #c9d0d8; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .fade{ fill: #97a1ad; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .tie { stroke: #b3bcc7; stroke-width: 1.5; fill: none; stroke-dasharray: 2 5; }
+    .red { fill: #c2382e; }
+    .ok  { fill: #1f7a5c; }
+    .okl { stroke: #1f7a5c; stroke-width: 2; fill: none; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .kick{ font: 600 12px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 1.6px; }
+    .lbl { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 12.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .smb { font: 600 12.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .hit { fill: #222831; stroke: #35c1b6; }
+      .dim { stroke: #3a434e; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .fade{ fill: #6a7481; }
+      .ln  { stroke: #8b95a1; }
+      .tie { stroke: #414b57; }
+      .red { fill: #e8695c; }
+      .ok  { fill: #35c1b6; }
+      .okl { stroke: #35c1b6; }
+    }
+  </style>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f7a5c"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="510"/>
+  <text class="ttl ink" x="45" y="42">The metadata and the filesystem told two different stories</text>
+
+  <!-- ============ row A : declared ============ -->
+  <text class="kick mut" x="45" y="84">DECLARED — libvirt snapshot metadata</text>
+
+  <rect class="box" x="45"  y="98" width="250" height="104" rx="10"/>
+  <text class="lbl ink" x="170" y="134" text-anchor="middle">win11.qcow2</text>
+  <text class="sml mut" x="170" y="157" text-anchor="middle">the original base image</text>
+
+  <rect class="box" x="415" y="98" width="250" height="104" rx="10"/>
+  <text class="lbl ink" x="540" y="134" text-anchor="middle">win11.pre-network-change</text>
+  <text class="sml mut" x="540" y="157" text-anchor="middle">snapshot 1 · no parent</text>
+  <text class="sml mut" x="540" y="178" text-anchor="middle">network change not yet fixed</text>
+
+  <rect class="box" x="785" y="98" width="250" height="104" rx="10"/>
+  <text class="lbl ink" x="910" y="134" text-anchor="middle">win11.networking_fixed</text>
+  <text class="sml mut" x="910" y="157" text-anchor="middle">snapshot 2 · parent: snapshot 1</text>
+  <text class="smb ok"  x="910" y="178" text-anchor="middle">Current: yes — the good state</text>
+
+  <!-- backing-file arrows, child -> parent -->
+  <line class="ln" x1="415" y1="168" x2="303" y2="168" marker-end="url(#ar)"/>
+  <text class="mono mut" x="359" y="150" text-anchor="middle">backing file</text>
+  <line class="ln" x1="785" y1="168" x2="673" y2="168" marker-end="url(#ar)"/>
+  <text class="mono mut" x="729" y="150" text-anchor="middle">backing file</text>
+
+  <!-- ties between the two rows -->
+  <line class="tie" x1="170" y1="202" x2="170" y2="296"/>
+  <line class="tie" x1="540" y1="202" x2="540" y2="296"/>
+  <line class="tie" x1="910" y1="202" x2="910" y2="296"/>
+
+  <!-- ============ row B : on disk ============ -->
+  <text class="kick mut" x="45" y="282">ON DISK — what ls -la actually found</text>
+
+  <rect class="dim" x="45"  y="296" width="250" height="104" rx="10"/>
+  <text class="lbl fade" x="170" y="338" text-anchor="middle">win11.qcow2</text>
+  <text class="smb red"  x="170" y="361" text-anchor="middle">gone</text>
+
+  <rect class="hit" x="415" y="296" width="250" height="104" rx="10"/>
+  <text class="lbl ink" x="540" y="332" text-anchor="middle">win11.pre-network-change</text>
+  <text class="sml mut" x="540" y="355" text-anchor="middle">standalone — no backing file</text>
+  <text class="mono mut" x="540" y="376" text-anchor="middle">80 GiB virtual · 64 GiB real</text>
+
+  <rect class="dim" x="785" y="296" width="250" height="104" rx="10"/>
+  <text class="lbl fade" x="910" y="338" text-anchor="middle">win11.networking_fixed</text>
+  <text class="smb red"  x="910" y="361" text-anchor="middle">gone</text>
+
+  <!-- callout -->
+  <line class="okl" x1="540" y1="450" x2="540" y2="408" marker-end="url(#ag)"/>
+  <text class="smb ok" x="540" y="474" text-anchor="middle">the domain was booting from here</text>
+  <text class="sml mut" x="540" y="494" text-anchor="middle">the middle of the chain — the state before the fix</text>
+</svg>

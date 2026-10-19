@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 440" width="1080" height="440" role="img" aria-label="Diagram: three sources of information about a snapshot chain. The virsh commands read libvirt's own bookkeeping and qemu-img info reads the pointer written inside each qcow2 header; both are only claims. Listing the image directory reads the files that are actually there, the only source that cannot be out of date.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .chip{ fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .hit { fill: #ffffff; stroke: #1f7a5c; stroke-width: 2.5; }
+    .tag { fill: #e3e7ec; stroke: none; }
+    .tgo { fill: #1f7a5c; stroke: none; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .inv { fill: #ffffff; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .okl { stroke: #1f7a5c; stroke-width: 2; fill: none; }
+    .ok  { fill: #1f7a5c; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .cmd { font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .hd  { font: 600 14.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 12.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .tg  { font: 600 12px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 1.4px; }
+    .foot{ font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .chip{ fill: #1d222a; stroke: #414b57; }
+      .box { fill: #222831; stroke: #414b57; }
+      .hit { fill: #222831; stroke: #35c1b6; }
+      .tag { fill: #2c333d; }
+      .tgo { fill: #35c1b6; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .inv { fill: #12171c; }
+      .ln  { stroke: #8b95a1; }
+      .okl { stroke: #35c1b6; }
+      .ok  { fill: #35c1b6; }
+    }
+  </style>
+  <defs>
+    <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="ag3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f7a5c"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="440"/>
+  <text class="ttl ink" x="45" y="42">Three sources, only one of them an observation</text>
+
+  <!-- row 1 -->
+  <rect class="chip" x="45" y="76" width="292" height="82" rx="10"/>
+  <text class="cmd ink" x="66" y="108">virsh domblklist</text>
+  <text class="cmd ink" x="66" y="132">virsh snapshot-info / -dumpxml</text>
+  <line class="ln" x1="337" y1="117" x2="378" y2="117" marker-end="url(#ar3)"/>
+  <rect class="box" x="386" y="76" width="470" height="82" rx="10"/>
+  <text class="hd ink"  x="410" y="107">libvirt's own bookkeeping</text>
+  <text class="sml mut" x="410" y="131">the domain definition, plus one XML file per snapshot</text>
+  <rect class="tag" x="880" y="102" width="155" height="30" rx="15"/>
+  <text class="tg mut" x="957" y="122" text-anchor="middle">CLAIM</text>
+
+  <!-- row 2 -->
+  <rect class="chip" x="45" y="180" width="292" height="82" rx="10"/>
+  <text class="cmd ink" x="66" y="228">qemu-img info -U &lt;file&gt;</text>
+  <line class="ln" x1="337" y1="221" x2="378" y2="221" marker-end="url(#ar3)"/>
+  <rect class="box" x="386" y="180" width="470" height="82" rx="10"/>
+  <text class="hd ink"  x="410" y="211">the qcow2 file header</text>
+  <text class="sml mut" x="410" y="235">the backing-file pointer written inside each image</text>
+  <rect class="tag" x="880" y="206" width="155" height="30" rx="15"/>
+  <text class="tg mut" x="957" y="226" text-anchor="middle">CLAIM</text>
+
+  <!-- row 3 -->
+  <rect class="chip" x="45" y="284" width="292" height="82" rx="10"/>
+  <text class="cmd ink" x="66" y="316">ls -la</text>
+  <text class="cmd ink" x="66" y="340">/var/lib/libvirt/images/</text>
+  <line class="okl" x1="337" y1="325" x2="378" y2="325" marker-end="url(#ag3)"/>
+  <rect class="hit" x="386" y="284" width="470" height="82" rx="10"/>
+  <text class="hd ink"  x="410" y="315">the files that are actually there</text>
+  <text class="sml mut" x="410" y="339">the only one of the three that cannot be out of date</text>
+  <rect class="tgo" x="880" y="310" width="155" height="30" rx="15"/>
+  <text class="tg inv" x="957" y="330" text-anchor="middle">GROUND TRUTH</text>
+
+  <text class="foot ink" x="45" y="410">When the claims and the ground truth disagree, that gap is the incident.</text>
+</svg>

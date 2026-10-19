@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Banner: a Windows KVM guest driven entirely from the host shell over the QEMU guest agent's virtio-serial channel, with the graphical paths — SPICE console and RDP — crossed out.">
+  <style>
+    .bg   { fill: #12161c; }
+    .edge { fill: none; stroke: #2b333e; stroke-width: 2; }
+    .box  { fill: #1b212a; stroke: #3a4451; stroke-width: 1.5; }
+    .live { fill: #1b212a; stroke: #35c1b6; stroke-width: 2.5; }
+    .ink  { fill: #eaeef4; }
+    .mut  { fill: #98a3b0; }
+    .ln   { stroke: #7f8b99; stroke-width: 2.5; fill: none; }
+    .pipe { stroke: #35c1b6; stroke-width: 3; fill: none; }
+    .dead { stroke: #e0655a; stroke-width: 2.5; fill: none; stroke-dasharray: 8 6; }
+    .xm   { stroke: #e0655a; stroke-width: 3; fill: none; }
+    .rule { stroke: #2b333e; stroke-width: 1; }
+    .head { font: 700 56px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .sub  { font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .kick { font: 700 16px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 3px; }
+    .lbl  { font: 700 20px Menlo, Consolas, monospace; }
+    .cmd  { font: 400 17px Menlo, Consolas, monospace; }
+    .sml  { font: 400 15px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .foot { font: 400 17px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .tea  { fill: #35c1b6; }
+    .red  { fill: #e0655a; }
+  </style>
+  <defs>
+    <marker id="hh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#35c1b6"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="630"/>
+  <rect class="edge" x="1" y="1" width="1198" height="628"/>
+
+  <text class="kick mut" x="72" y="112">KVM · LIBVIRT · QEMU GUEST AGENT · WINDOWS</text>
+  <text class="head ink" x="72" y="178">No console, no RDP</text>
+  <text class="sub mut" x="72" y="216">driving a freshly installed Windows guest entirely from the host shell</text>
+
+  <line class="rule" x1="72" y1="258" x2="1128" y2="258"/>
+
+  <!-- host -->
+  <rect class="box" x="72" y="316" width="330" height="128" rx="14"/>
+  <text class="lbl ink" x="100" y="360">host shell</text>
+  <text class="cmd mut" x="100" y="392">virsh qemu-agent-command</text>
+  <text class="cmd mut" x="100" y="418">guest-exec / guest-exec-status</text>
+
+  <!-- channel -->
+  <line class="pipe" x1="402" y1="380" x2="798" y2="380" marker-start="url(#hh)" marker-end="url(#hh)"/>
+  <rect class="live" x="452" y="356" width="296" height="48" rx="12"/>
+  <text class="lbl tea" x="600" y="387" text-anchor="middle">org.qemu.guest_agent.0</text>
+  <text class="sml mut" x="600" y="436" text-anchor="middle">a virtio-serial port, independent of the network</text>
+
+  <!-- guest -->
+  <rect class="box" x="798" y="316" width="330" height="128" rx="14"/>
+  <text class="lbl ink" x="826" y="360">windows guest</text>
+  <text class="cmd mut" x="826" y="392">qemu-ga  ·  powershell.exe</text>
+  <text class="cmd mut" x="826" y="418">netsh  ·  msiexec  ·  registry</text>
+
+  <!-- crossed-out graphical paths -->
+  <path class="dead" d="M963,316 L963,282 L600,282"/>
+  <path class="dead" d="M963,444 L963,478 L600,478"/>
+  <text class="sml red" x="744" y="274" text-anchor="end">SPICE console</text>
+  <text class="sml red" x="744" y="504" text-anchor="end">RDP  ·  3389</text>
+  <line class="xm" x1="762" y1="270" x2="786" y2="294"/>
+  <line class="xm" x1="786" y1="270" x2="762" y2="294"/>
+  <line class="xm" x1="762" y1="466" x2="786" y2="490"/>
+  <line class="xm" x1="786" y1="466" x2="762" y2="490"/>
+
+  <text class="foot mut" x="72" y="566">static IP, firewall rules, a silent MSI install and RDP itself — all of it blind, from a terminal</text>
+</svg>

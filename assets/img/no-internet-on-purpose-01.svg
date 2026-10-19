@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="1080" height="560" role="img" aria-label="Diagram: two boundaries. A connected machine can copy files to the air-gapped host over scp, but there is no share and no network path from the host filesystem into the guest VM. The only channel left is the hypervisor, which attaches the ISO to the guest as a virtual CD-ROM.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .hostbg { fill: #e4e9ef; stroke: #aeb8c4; stroke-width: 1.5; stroke-dasharray: 7 5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .dead{ stroke: #c2382e; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+    .red { fill: #c2382e; }
+    .key { stroke: #1f6f5c; stroke-width: 2.5; fill: none; }
+    .keyf{ fill: #1f6f5c; }
+    .keybox { fill: #ffffff; stroke: #1f6f5c; stroke-width: 2; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .hostbg { fill: #1c2027; stroke: #3d4753; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .dead{ stroke: #e8695c; }
+      .red { fill: #e8695c; }
+      .key { stroke: #4fbfa3; }
+      .keyf{ fill: #4fbfa3; }
+      .keybox { fill: #222831; stroke: #4fbfa3; }
+    }
+  </style>
+  <defs>
+    <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2382e"/>
+    </marker>
+    <marker id="b3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f6f5c"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="560"/>
+  <text class="ttl ink" x="40" y="44">The last hop has no network — but it does have a hypervisor</text>
+
+  <!-- connected machine -->
+  <rect class="box" x="40" y="250" width="180" height="88" rx="10"/>
+  <text class="lbl ink" x="130" y="288" text-anchor="middle">your laptop</text>
+  <text class="sml mut" x="130" y="310" text-anchor="middle">has internet</text>
+
+  <line class="ln" x1="220" y1="294" x2="284" y2="294" marker-end="url(#b1)"/>
+  <text class="mono mut" x="252" y="278" text-anchor="middle">scp</text>
+
+  <!-- host container -->
+  <rect class="hostbg" x="292" y="104" width="748" height="392" rx="14"/>
+  <text class="lbl ink" x="316" y="140">air-gapped host</text>
+  <text class="sml mut" x="316" y="162">Beckhoff IPC · TwinCAT Linux RT · no route to the internet</text>
+
+  <!-- host filesystem -->
+  <rect class="box" x="330" y="250" width="200" height="88" rx="10"/>
+  <text class="lbl ink" x="430" y="288" text-anchor="middle">host filesystem</text>
+  <text class="sml mut" x="430" y="310" text-anchor="middle">the payload lands here</text>
+
+  <!-- guest -->
+  <rect class="box" x="812" y="236" width="196" height="116" rx="10"/>
+  <text class="lbl ink" x="910" y="274" text-anchor="middle">Windows guest</text>
+  <text class="sml mut" x="910" y="300" text-anchor="middle">no internet, no share,</text>
+  <text class="sml mut" x="910" y="320" text-anchor="middle">no path in from the LAN</text>
+
+  <!-- dead direct path -->
+  <line class="dead" x1="530" y1="272" x2="644" y2="272"/>
+  <line class="dead" x1="716" y1="272" x2="800" y2="272"/>
+  <line class="dead" x1="654" y1="252" x2="706" y2="292" stroke-dasharray="none" stroke-width="3"/>
+  <line class="dead" x1="706" y1="252" x2="654" y2="292" stroke-dasharray="none" stroke-width="3"/>
+  <text class="sml red" x="680" y="234" text-anchor="middle">no share, no network path</text>
+
+  <!-- live path through the hypervisor -->
+  <path class="key" d="M430,338 L430,406 L586,406" marker-end="url(#b3)"/>
+  <rect class="keybox" x="594" y="376" width="192" height="60" rx="10"/>
+  <text class="lbl keyf" x="690" y="401" text-anchor="middle">libvirt + QEMU</text>
+  <text class="sml keyf" x="690" y="421" text-anchor="middle">attaches a virtual CD</text>
+  <path class="key" d="M786,406 L910,406 L910,360" marker-end="url(#b3)"/>
+
+  <text class="mono keyf" x="440" y="432">tools.iso</text>
+  <text class="sml keyf" x="910" y="438" text-anchor="middle">shows up as a drive letter</text>
+
+  <text class="sml mut" x="40" y="528">You control the hypervisor even when you control none of the networks — so the device bus becomes the transport.</text>
+</svg>

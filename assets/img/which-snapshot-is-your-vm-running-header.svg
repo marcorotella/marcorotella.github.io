@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Banner: a libvirt snapshot chain drawn twice, once as the metadata declares it and once as the filesystem actually holds it. The base image and the snapshot marked current are both missing from the second row; only the intermediate, pre-fix state survives, and that is what the VM was booting from.">
+  <style>
+    .bg   { fill: #12161c; }
+    .edge { fill: none; stroke: #2b333e; stroke-width: 2; }
+    .box  { fill: #1b212a; stroke: #3a4451; stroke-width: 1.5; }
+    .hit  { fill: #1b212a; stroke: #35c1b6; stroke-width: 2.5; }
+    .dim  { fill: none; stroke: #3a4451; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .ink  { fill: #eaeef4; }
+    .mut  { fill: #98a3b0; }
+    .fade { fill: #626d7a; }
+    .ln   { stroke: #7f8b99; stroke-width: 2.5; fill: none; }
+    .rule { stroke: #2b333e; stroke-width: 1; }
+    .red  { fill: #e8695c; }
+    .ok   { fill: #35c1b6; }
+    .head { font: 700 56px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .sub  { font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .kick { font: 700 16px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 3px; }
+    .rlbl { font: 700 13px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 2.2px; }
+    .lbl  { font: 700 18px Menlo, Consolas, monospace; }
+    .sml  { font: 400 15px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .smb  { font: 700 15px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .foot { font: 400 17px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7f8b99"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="630"/>
+  <rect class="edge" x="1" y="1" width="1198" height="628"/>
+
+  <!-- header block -->
+  <text class="kick mut" x="72" y="112">LIBVIRT · QCOW2 · EXTERNAL SNAPSHOTS</text>
+  <text class="head ink" x="72" y="178">Which snapshot is running?</text>
+  <text class="sub mut"  x="72" y="216">Reading a broken chain when nobody left any notes</text>
+
+  <line class="rule" x1="72" y1="256" x2="1128" y2="256"/>
+
+  <!-- declared row -->
+  <text class="rlbl mut" x="72" y="300">DECLARED</text>
+
+  <rect class="box" x="72" y="316" width="316" height="82" rx="12"/>
+  <text class="lbl ink" x="230" y="352" text-anchor="middle">win11.qcow2</text>
+  <text class="sml mut" x="230" y="376" text-anchor="middle">base</text>
+
+  <rect class="box" x="442" y="316" width="316" height="82" rx="12"/>
+  <text class="lbl ink" x="600" y="352" text-anchor="middle">win11.pre-network-change</text>
+  <text class="sml mut" x="600" y="376" text-anchor="middle">snapshot 1</text>
+
+  <rect class="box" x="812" y="316" width="316" height="82" rx="12"/>
+  <text class="lbl ink" x="970" y="352" text-anchor="middle">win11.networking_fixed</text>
+  <text class="smb ok"  x="970" y="376" text-anchor="middle">snapshot 2 · current</text>
+
+  <line class="ln" x1="442" y1="357" x2="396" y2="357" marker-end="url(#ah)"/>
+  <line class="ln" x1="812" y1="357" x2="766" y2="357" marker-end="url(#ah)"/>
+
+  <!-- on disk row -->
+  <text class="rlbl mut" x="72" y="446">ON DISK</text>
+
+  <rect class="dim" x="72" y="462" width="316" height="82" rx="12"/>
+  <text class="lbl fade" x="230" y="498" text-anchor="middle">win11.qcow2</text>
+  <text class="smb red"  x="230" y="522" text-anchor="middle">gone</text>
+
+  <rect class="hit" x="442" y="462" width="316" height="82" rx="12"/>
+  <text class="lbl ink" x="600" y="498" text-anchor="middle">win11.pre-network-change</text>
+  <text class="sml mut" x="600" y="522" text-anchor="middle">standalone · the state before the fix</text>
+
+  <rect class="dim" x="812" y="462" width="316" height="82" rx="12"/>
+  <text class="lbl fade" x="970" y="498" text-anchor="middle">win11.networking_fixed</text>
+  <text class="smb red"  x="970" y="522" text-anchor="middle">gone</text>
+
+  <text class="foot mut" x="72" y="588">the VM was booting from the middle of a chain whose good end nobody could find</text>
+</svg>

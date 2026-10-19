@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 480" width="1080" height="480" role="img" aria-label="Timeline of the CD-ROM lifecycle drawn as a power-state waveform. The VM must be shut down to attach the ISO because the SATA bus cannot be hot-plugged, started again to run the silent installer from the new drive letter, then shut down once more to detach the CD-ROM and delete the ISO file.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .lvl { stroke: #c9d0d8; stroke-width: 1; stroke-dasharray: 4 5; fill: none; }
+    .wav { stroke: #14181d; stroke-width: 2.5; fill: none; }
+    .red { fill: #c2382e; }
+    .rln { stroke: #c2382e; stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+    .key { fill: #1f6f5c; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 12.5px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .lvl { stroke: #3a434e; }
+      .wav { stroke: #e9edf2; }
+      .red { fill: #e8695c; }
+      .rln { stroke: #e8695c; }
+      .key { fill: #4fbfa3; }
+    }
+  </style>
+  <defs>
+    <marker id="d2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2382e"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="480"/>
+  <text class="ttl ink" x="40" y="44">SATA has no hot-plug, so the CD-ROM costs you two cold cycles</text>
+
+  <!-- level guides -->
+  <line class="lvl" x1="150" y1="190" x2="1030" y2="190"/>
+  <line class="lvl" x1="150" y1="300" x2="1030" y2="300"/>
+  <text class="lbl mut" x="140" y="195" text-anchor="end">running</text>
+  <text class="lbl mut" x="140" y="305" text-anchor="end">off</text>
+
+  <!-- waveform -->
+  <path class="wav" d="M150,190 L268,190 L268,300 L400,300 L400,190 L648,190 L648,300 L804,300 L804,190 L1030,190"/>
+
+  <!-- edge labels -->
+  <text class="mono mut" x="276" y="250">shutdown</text>
+  <text class="mono mut" x="408" y="250">start</text>
+  <text class="mono mut" x="656" y="250">shutdown</text>
+
+  <!-- the hot-plug attempt that fails -->
+  <path class="rln" d="M209,190 L209,132" marker-end="url(#d2)"/>
+  <text class="sml red" x="252" y="96" text-anchor="middle">attaching here fails</text>
+  <text class="mono red" x="252" y="118" text-anchor="middle">disk bus 'sata' cannot be hotplugged</text>
+
+  <!-- install window annotation -->
+  <text class="mono key" x="524" y="146" text-anchor="middle">Get-Volume | ? DriveType -eq CD-ROM   →   F:</text>
+  <text class="mono key" x="524" y="166" text-anchor="middle">msiexec /i F:\OpenSSH-Win64.msi /quiet /norestart</text>
+
+  <!-- off-window annotations -->
+  <text class="mono ink" x="334" y="340" text-anchor="middle">virsh attach-disk vm tools.iso sdc</text>
+  <text class="mono ink" x="334" y="360" text-anchor="middle">--type cdrom --targetbus sata --config</text>
+
+  <text class="mono ink" x="726" y="340" text-anchor="middle">virsh detach-disk vm sdc --config</text>
+  <text class="mono ink" x="726" y="360" text-anchor="middle">rm tools.iso</text>
+
+  <text class="sml mut" x="917" y="152" text-anchor="middle">clean definition,</text>
+  <text class="sml mut" x="917" y="170" text-anchor="middle">no stale ISO left behind</text>
+
+  <text class="sml mut" x="40" y="440">Plan the attach and the detach into the same maintenance window — the second half is the one everybody forgets.</text>
+</svg>

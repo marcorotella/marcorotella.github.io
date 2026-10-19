@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="1080" height="560" role="img" aria-label="Diagram: the QEMU guest agent needs two halves. Above, the agent service runs inside Windows but the domain XML has no virtio-serial channel, so virsh reports that the guest agent is not configured. Below, after attaching the channel, host and guest are connected over a virtio-serial port and guest-ping answers.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .ok  { fill: #ffffff; stroke: #0e7f78; stroke-width: 2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .dead{ stroke: #c2382e; stroke-width: 2; fill: none; stroke-dasharray: 7 5; }
+    .live{ stroke: #0e7f78; stroke-width: 2.5; fill: none; }
+    .xm  { stroke: #c2382e; stroke-width: 2.5; fill: none; }
+    .red { fill: #c2382e; }
+    .tea { fill: #0e7f78; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .hd  { font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 1px; }
+    .lbl { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .ok  { fill: #222831; stroke: #3fbdb3; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .dead{ stroke: #e8695c; }
+      .live{ stroke: #3fbdb3; }
+      .xm  { stroke: #e8695c; }
+      .red { fill: #e8695c; }
+      .tea { fill: #3fbdb3; }
+    }
+  </style>
+  <defs>
+    <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e7f78"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="560"/>
+  <text class="ttl ink" x="40" y="44">The guest agent is two halves, and only one of them lives inside Windows</text>
+  <text class="sml mut" x="40" y="68">the service can be perfectly healthy and still have nothing on the other end of the wire</text>
+
+  <!-- ROW 1 : before -->
+  <text class="hd red" x="40" y="118">BEFORE</text>
+  <text class="sml mut" x="112" y="118">service installed, channel never declared in the domain XML</text>
+
+  <rect class="box" x="60" y="140" width="300" height="96" rx="10"/>
+  <text class="sml mut" x="80" y="168">HOST — Debian / libvirt</text>
+  <text class="mono ink" x="80" y="194">virsh qemu-agent-command</text>
+  <text class="sml mut" x="80" y="218">looks for a unix socket</text>
+
+  <rect class="box" x="720" y="140" width="300" height="96" rx="10"/>
+  <text class="sml mut" x="740" y="168">WINDOWS GUEST</text>
+  <text class="mono ink" x="740" y="194">qemu-ga  ·  Running</text>
+  <text class="sml mut" x="740" y="218">from virtio-win-guest-tools</text>
+
+  <line class="dead" x1="360" y1="188" x2="512" y2="188"/>
+  <line class="dead" x1="568" y1="188" x2="720" y2="188"/>
+  <line class="xm" x1="524" y1="176" x2="556" y2="200"/>
+  <line class="xm" x1="556" y1="176" x2="524" y2="200"/>
+  <text class="sml red" x="540" y="228" text-anchor="middle">no &lt;channel&gt; element in the domain XML</text>
+
+  <text class="mono red" x="540" y="272" text-anchor="middle">error: argument unsupported: QEMU guest agent is not configured</text>
+
+  <!-- ROW 2 : after -->
+  <text class="hd tea" x="40" y="340">AFTER</text>
+  <text class="mono mut" x="112" y="340">virsh attach-device win11 qga-channel.xml --live --config</text>
+
+  <rect class="box" x="60" y="362" width="300" height="96" rx="10"/>
+  <text class="sml mut" x="80" y="390">HOST — Debian / libvirt</text>
+  <text class="mono ink" x="80" y="416">virsh qemu-agent-command</text>
+  <text class="sml mut" x="80" y="440">unix socket, opened by libvirt</text>
+
+  <rect class="ok" x="720" y="362" width="300" height="96" rx="10"/>
+  <text class="sml mut" x="740" y="390">WINDOWS GUEST</text>
+  <text class="mono ink" x="740" y="416">qemu-ga  ·  Running</text>
+  <text class="sml mut" x="740" y="440">opens the virtio-serial port</text>
+
+  <line class="live" x1="360" y1="410" x2="720" y2="410" marker-start="url(#c1)" marker-end="url(#c1)"/>
+  <rect class="ok" x="416" y="392" width="248" height="34" rx="8"/>
+  <text class="mono tea" x="540" y="414" text-anchor="middle">org.qemu.guest_agent.0</text>
+  <text class="sml mut" x="540" y="452" text-anchor="middle">a virtio-serial port — not a network path</text>
+
+  <text class="mono tea" x="540" y="504" text-anchor="middle">{"execute":"guest-ping"}  →  {"return":{}}</text>
+</svg>

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 640" width="1080" height="640" role="img" aria-label="Sequence diagram: the host encodes a PowerShell command as UTF-16LE base64, sends guest-exec over the agent channel and immediately gets back only a process id. It then polls guest-exec-status until exited is true, and finally decodes the base64 out-data to read the output.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .side{ fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .life{ stroke: #b3bcc7; stroke-width: 1.5; fill: none; }
+    .loop{ fill: none; stroke: #b3bcc7; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .blu { fill: #2f6fb2; }
+    .tea { fill: #0e7f78; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .hd  { font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: 1px; }
+    .lbl { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .tiny{ font: 400 12px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .side{ fill: #1d2229; stroke: #3a434e; }
+      .life{ stroke: #4b5563; }
+      .loop{ stroke: #4b5563; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .blu { fill: #74aae2; }
+      .tea { fill: #3fbdb3; }
+    }
+  </style>
+  <defs>
+    <marker id="s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="640"/>
+  <text class="ttl ink" x="40" y="44">guest-exec hands you a receipt, not a result</text>
+  <text class="sml mut" x="40" y="68">one command, an asynchronous pid, and two base64 hops in opposite directions</text>
+
+  <!-- lifelines -->
+  <rect class="box" x="270" y="94" width="220" height="42" rx="10"/>
+  <text class="lbl ink" x="380" y="121" text-anchor="middle">host  ·  virsh</text>
+  <rect class="box" x="700" y="94" width="220" height="42" rx="10"/>
+  <text class="lbl ink" x="810" y="121" text-anchor="middle">guest  ·  qemu-ga</text>
+
+  <line class="life" x1="380" y1="136" x2="380" y2="600"/>
+  <line class="life" x1="810" y1="136" x2="810" y2="600"/>
+
+  <!-- step 1 : local encode -->
+  <rect class="side" x="40" y="160" width="216" height="72" rx="10"/>
+  <text class="tiny mut" x="56" y="182">1 — on the host</text>
+  <text class="mono ink" x="56" y="204">iconv -t UTF-16LE</text>
+  <text class="mono ink" x="56" y="222">| base64 -w0</text>
+  <line class="ln" x1="256" y1="196" x2="374" y2="196" marker-end="url(#s1)"/>
+
+  <!-- step 2 : guest-exec -->
+  <line class="ln" x1="380" y1="248" x2="804" y2="248" marker-end="url(#s1)"/>
+  <text class="lbl blu" x="592" y="240" text-anchor="middle">2 · guest-exec</text>
+  <text class="mono mut" x="592" y="268" text-anchor="middle">path: powershell.exe   arg: [ -EncodedCommand, &lt;b64&gt; ]</text>
+
+  <rect class="side" x="944" y="222" width="120" height="60" rx="10"/>
+  <text class="tiny mut" x="960" y="244">CreateProcess</text>
+  <text class="tiny mut" x="960" y="262">as SYSTEM,</text>
+  <text class="tiny mut" x="960" y="276">no desktop</text>
+  <line class="ln" x1="816" y1="252" x2="938" y2="252" marker-end="url(#s1)"/>
+
+  <!-- step 3 : receipt -->
+  <line class="ln" x1="810" y1="322" x2="386" y2="322" marker-end="url(#s1)"/>
+  <text class="mono ink" x="592" y="314" text-anchor="middle">3 · {"return":{"pid":1234}}</text>
+  <text class="tiny mut" x="592" y="342" text-anchor="middle">returns at once — the command is still running</text>
+
+  <!-- loop bracket -->
+  <rect class="loop" x="330" y="374" width="530" height="122" rx="10"/>
+  <text class="tiny mut" x="346" y="394">4 · poll until exited</text>
+
+  <line class="ln" x1="380" y1="426" x2="804" y2="426" marker-end="url(#s1)"/>
+  <text class="lbl blu" x="592" y="418" text-anchor="middle">guest-exec-status  {"pid":1234}</text>
+
+  <line class="ln" x1="810" y1="476" x2="386" y2="476" marker-end="url(#s1)"/>
+  <text class="mono mut" x="592" y="468" text-anchor="middle">{"exited":false}</text>
+
+  <!-- final status -->
+  <line class="ln" x1="810" y1="536" x2="386" y2="536" marker-end="url(#s1)"/>
+  <text class="mono ink" x="592" y="528" text-anchor="middle">{"exited":true,"exitcode":0,"out-data":"&lt;b64&gt;"}</text>
+
+  <!-- step 5 : local decode -->
+  <rect class="side" x="40" y="546" width="216" height="54" rx="10"/>
+  <text class="tiny mut" x="56" y="568">5 — on the host</text>
+  <text class="mono ink" x="56" y="590">base64 -d</text>
+  <line class="ln" x1="374" y1="576" x2="262" y2="576" marker-end="url(#s1)"/>
+  <text class="sml tea" x="592" y="580" text-anchor="middle">stdout and stderr arrive base64-encoded too</text>
+</svg>

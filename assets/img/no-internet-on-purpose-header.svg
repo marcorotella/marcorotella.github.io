@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Banner: software crosses an air gap as one self-contained artefact. On the connected side a package feed or an installer is assembled into a single file; that file crosses a dashed air-gap boundary; on the isolated side a local tool consumes it with no network involved.">
+  <style>
+    .bg   { fill: #12161c; }
+    .edge { fill: none; stroke: #2b333e; stroke-width: 2; }
+    .box  { fill: #1b212a; stroke: #3a4451; stroke-width: 1.5; }
+    .ink  { fill: #eaeef4; }
+    .mut  { fill: #98a3b0; }
+    .ln   { stroke: #7f8b99; stroke-width: 2.5; fill: none; }
+    .gap  { stroke: #e0a33c; stroke-width: 2.5; fill: none; stroke-dasharray: 9 8; }
+    .amb  { fill: #e0a33c; }
+    .rule { stroke: #2b333e; stroke-width: 1; }
+    .head { font: 700 56px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .sub  { font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .kick { font: 700 16px "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 3px; }
+    .lbl  { font: 700 20px Menlo, Consolas, monospace; }
+    .sml  { font: 400 15px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    .foot { font: 400 17px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7f8b99"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="630"/>
+  <rect class="edge" x="1" y="1" width="1198" height="628"/>
+
+  <!-- header block -->
+  <text class="kick mut" x="72" y="112">AIR GAP · TWINCAT · LIBVIRT · OFFLINE INSTALL</text>
+  <text class="head ink" x="72" y="178">No internet, on purpose</text>
+  <text class="sub mut" x="72" y="216">how software reaches a machine that will never see a repository</text>
+
+  <line class="rule" x1="72" y1="256" x2="1128" y2="256"/>
+
+  <!-- flow -->
+  <text class="sml mut" x="72" y="316">connected side</text>
+  <text class="sml amb" x="726" y="316">air gap</text>
+  <text class="sml mut" x="1128" y="316" text-anchor="end">isolated side</text>
+
+  <rect class="box" x="72" y="348" width="230" height="92" rx="12"/>
+  <text class="lbl ink" x="187" y="384" text-anchor="middle">assemble it here</text>
+  <text class="sml mut" x="187" y="410" text-anchor="middle">a machine with a route out</text>
+
+  <line class="ln" x1="302" y1="394" x2="342" y2="394" marker-end="url(#ah)"/>
+
+  <rect class="box" x="350" y="348" width="300" height="92" rx="12"/>
+  <text class="lbl ink" x="500" y="384" text-anchor="middle">one self-contained file</text>
+  <text class="sml mut" x="500" y="410" text-anchor="middle">a package feed, or an ISO</text>
+
+  <line class="ln" x1="650" y1="394" x2="790" y2="394" marker-end="url(#ah)"/>
+  <line class="gap" x1="720" y1="296" x2="720" y2="492"/>
+
+  <rect class="box" x="798" y="348" width="330" height="92" rx="12"/>
+  <text class="lbl ink" x="963" y="384" text-anchor="middle">a local tool reads it</text>
+  <text class="sml mut" x="963" y="410" text-anchor="middle">no route out, nothing to reach</text>
+
+  <text class="foot mut" x="72" y="556">when the network is the problem, the answer is media — not a cleverer way to reach an internet you do not have</text>
+</svg>

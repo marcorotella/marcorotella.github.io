@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" width="1080" height="520" role="img" aria-label="Diagram: the same Windows VM build drawn twice. In the manual path a human is required at the Windows Setup wizard, at the Load Driver step and again for the post-install configuration. In the planned unattended path the same three stages are covered by an answer file, its DriverPaths section and a config-drive read at first boot, so one script runs the whole sequence with nobody watching.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .acb { fill: #ffffff; stroke: #1a6e7e; stroke-width: 1.5; }
+    .pil { fill: #f4f6f9; stroke: #b3bcc7; stroke-width: 1.5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .acl { stroke: #1a6e7e; stroke-width: 2; fill: none; }
+    .red { fill: #c2382e; }
+    .acc { fill: #1a6e7e; }
+    .rul { stroke: #c9d0d8; stroke-width: 1; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sec { font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 12.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 12.5px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .tny { font: 600 11.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .acb { fill: #222831; stroke: #6fc2d4; }
+      .pil { fill: #1d2229; stroke: #414b57; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .acl { stroke: #6fc2d4; }
+      .red { fill: #e8695c; }
+      .acc { fill: #6fc2d4; }
+      .rul { stroke: #3a434e; }
+    }
+  </style>
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+    <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a6e7e"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="520"/>
+  <text class="ttl ink" x="48" y="44">The same build, twice: where a human is still required</text>
+
+  <!-- ============ lane A ============ -->
+  <text class="sec ink" x="48" y="102">Today — by hand</text>
+  <line class="rul" x1="185" y1="97" x2="1040" y2="97"/>
+
+  <rect class="box" x="48" y="126" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="143" y="158" text-anchor="middle">create + define</text>
+  <text class="sml mut" x="143" y="180" text-anchor="middle">host shell, scripted</text>
+
+  <line class="ln" x1="242" y1="167" x2="266" y2="167" marker-end="url(#a1)"/>
+
+  <rect class="box" x="270" y="126" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="365" y="158" text-anchor="middle">Windows Setup</text>
+  <text class="sml mut" x="365" y="180" text-anchor="middle">locale, disk, account</text>
+
+  <line class="ln" x1="464" y1="167" x2="488" y2="167" marker-end="url(#a1)"/>
+
+  <rect class="box" x="492" y="126" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="587" y="158" text-anchor="middle">Load Driver</text>
+  <text class="mono mut" x="587" y="180" text-anchor="middle">viostor</text>
+
+  <line class="ln" x1="686" y1="167" x2="710" y2="167" marker-end="url(#a1)"/>
+
+  <rect class="box" x="714" y="126" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="809" y="158" text-anchor="middle">configure guest</text>
+  <text class="mono mut" x="809" y="180" text-anchor="middle">guest-exec, by hand</text>
+
+  <line class="ln" x1="908" y1="167" x2="932" y2="167" marker-end="url(#a1)"/>
+
+  <rect class="pil" x="936" y="140" width="104" height="54" rx="27"/>
+  <text class="sml ink" x="988" y="172" text-anchor="middle">guest ready</text>
+
+  <!-- human markers -->
+  <line class="rul" x1="365" y1="208" x2="365" y2="222"/>
+  <line class="rul" x1="587" y1="208" x2="587" y2="222"/>
+  <line class="rul" x1="809" y1="208" x2="809" y2="222"/>
+  <text class="tny red" x="365" y="238" text-anchor="middle">you, at the console</text>
+  <text class="tny red" x="587" y="238" text-anchor="middle">you, at the console</text>
+  <text class="tny red" x="809" y="238" text-anchor="middle">you, at the shell</text>
+
+  <!-- ============ lane B ============ -->
+  <text class="sec ink" x="48" y="296">Planned — unattended</text>
+  <line class="rul" x1="215" y1="291" x2="1040" y2="291"/>
+
+  <rect class="acb" x="48" y="314" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="143" y="344" text-anchor="middle">create + define</text>
+  <text class="sml mut" x="143" y="365" text-anchor="middle">XML template</text>
+  <text class="tny acc" x="143" y="384" text-anchor="middle">layer 3</text>
+
+  <line class="acl" x1="242" y1="355" x2="266" y2="355" marker-end="url(#a3)"/>
+
+  <rect class="acb" x="270" y="314" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="365" y="344" text-anchor="middle">Windows Setup</text>
+  <text class="mono mut" x="365" y="365" text-anchor="middle">autounattend.xml</text>
+  <text class="tny acc" x="365" y="384" text-anchor="middle">layer 1</text>
+
+  <line class="acl" x1="464" y1="355" x2="488" y2="355" marker-end="url(#a3)"/>
+
+  <rect class="acb" x="492" y="314" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="587" y="344" text-anchor="middle">driver auto-loaded</text>
+  <text class="mono mut" x="587" y="365" text-anchor="middle">&lt;DriverPaths&gt;</text>
+  <text class="tny acc" x="587" y="384" text-anchor="middle">layer 1</text>
+
+  <line class="acl" x1="686" y1="355" x2="710" y2="355" marker-end="url(#a3)"/>
+
+  <rect class="acb" x="714" y="314" width="190" height="82" rx="10"/>
+  <text class="lbl ink" x="809" y="344" text-anchor="middle">first-boot config</text>
+  <text class="mono mut" x="809" y="365" text-anchor="middle">config-drive</text>
+  <text class="tny acc" x="809" y="384" text-anchor="middle">layer 2</text>
+
+  <line class="acl" x1="908" y1="355" x2="932" y2="355" marker-end="url(#a3)"/>
+
+  <rect class="pil" x="936" y="328" width="104" height="54" rx="27"/>
+  <text class="sml ink" x="988" y="360" text-anchor="middle">guest ready</text>
+
+  <!-- span bracket -->
+  <path class="acl" d="M48,414 L48,424 L1040,424 L1040,414"/>
+  <text class="tny acc" x="544" y="446" text-anchor="middle">one script, nobody watching</text>
+
+  <text class="sml mut" x="48" y="492">The end state is identical. What changes is who supplies the answers, and when.</text>
+</svg>

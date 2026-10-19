@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 520" width="1080" height="520" role="img" aria-label="Diagram comparing two offline installs. In case A the vendor tool tcpkg downloads a package and its dependencies into an offline feed folder, which is copied across the air gap and added as a source. In case B an official MSI is downloaded from a project release page, packed into an ISO, copied across and attached as a CD-ROM. The two rows have the same shape; only the payload and the local reader differ.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .gap { stroke: #b8860b; stroke-width: 2; fill: none; stroke-dasharray: 8 6; }
+    .amb { fill: #8a6508; }
+    .rowa{ fill: #1f6f5c; }
+    .rowb{ fill: #5b53c8; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .hdr { font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sml { font: 400 13px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .box { fill: #222831; stroke: #414b57; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .gap { stroke: #d9a534; }
+      .amb { fill: #d9a534; }
+      .rowa{ fill: #4fbfa3; }
+      .rowb{ fill: #9d95f5; }
+    }
+  </style>
+  <defs>
+    <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="520"/>
+  <text class="ttl ink" x="40" y="44">Same crossing, different payload</text>
+
+  <!-- air gap -->
+  <line class="gap" x1="650" y1="84" x2="650" y2="452"/>
+  <text class="hdr amb" x="650" y="76" text-anchor="middle">air gap</text>
+
+  <!-- ROW A -->
+  <text class="hdr rowa" x="40" y="118">A · the vendor already solved it</text>
+
+  <rect class="box" x="40" y="132" width="188" height="86" rx="10"/>
+  <text class="lbl ink" x="134" y="168" text-anchor="middle">tcpkg</text>
+  <text class="sml mut" x="134" y="190" text-anchor="middle">on a connected PC</text>
+
+  <line class="ln" x1="228" y1="175" x2="338" y2="175" marker-end="url(#c1)"/>
+  <text class="mono mut" x="283" y="160" text-anchor="middle">tcpkg download</text>
+
+  <rect class="box" x="346" y="132" width="222" height="86" rx="10"/>
+  <text class="lbl ink" x="457" y="164" text-anchor="middle">offline feed folder</text>
+  <text class="sml mut" x="457" y="186" text-anchor="middle">.nupkg for XAE</text>
+  <text class="sml mut" x="457" y="204" text-anchor="middle">+ every dependency, .NET included</text>
+
+  <line class="ln" x1="568" y1="175" x2="704" y2="175" marker-end="url(#c1)"/>
+  <text class="mono mut" x="600" y="160" text-anchor="middle">copy</text>
+
+  <rect class="box" x="712" y="132" width="316" height="86" rx="10"/>
+  <text class="lbl ink" x="870" y="164" text-anchor="middle">air-gapped machine</text>
+  <text class="mono rowa" x="870" y="186" text-anchor="middle">tcpkg source add -s=&lt;folder&gt;</text>
+  <text class="sml mut" x="870" y="205" text-anchor="middle">the tool was designed for exactly this</text>
+
+  <!-- ROW B -->
+  <text class="hdr rowb" x="40" y="298">B · nobody solved it for you</text>
+
+  <rect class="box" x="40" y="312" width="188" height="86" rx="10"/>
+  <text class="lbl ink" x="134" y="344" text-anchor="middle">release page</text>
+  <text class="sml mut" x="134" y="366" text-anchor="middle">official MSI</text>
+  <text class="sml mut" x="134" y="384" text-anchor="middle">+ checksum you verify</text>
+
+  <line class="ln" x1="228" y1="355" x2="338" y2="355" marker-end="url(#c1)"/>
+  <text class="mono mut" x="283" y="340" text-anchor="middle">makehybrid</text>
+
+  <rect class="box" x="346" y="312" width="222" height="86" rx="10"/>
+  <text class="lbl ink" x="457" y="344" text-anchor="middle">tools.iso</text>
+  <text class="sml mut" x="457" y="366" text-anchor="middle">hdiutil / genisoimage</text>
+  <text class="sml mut" x="457" y="384" text-anchor="middle">one file, self-contained</text>
+
+  <line class="ln" x1="568" y1="355" x2="704" y2="355" marker-end="url(#c1)"/>
+  <text class="mono mut" x="600" y="340" text-anchor="middle">copy</text>
+
+  <rect class="box" x="712" y="312" width="316" height="86" rx="10"/>
+  <text class="lbl ink" x="870" y="344" text-anchor="middle">air-gapped machine</text>
+  <text class="mono rowb" x="870" y="366" text-anchor="middle">virsh attach-disk --type cdrom</text>
+  <text class="sml mut" x="870" y="385" text-anchor="middle">you had to invent the channel yourself</text>
+
+  <text class="sml mut" x="40" y="482">Only the middle box really changes. Build outside, carry one self-contained artefact in, point a local tool at it — that part never varies.</text>
+</svg>

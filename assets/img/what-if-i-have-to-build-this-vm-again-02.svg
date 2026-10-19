@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 668" width="1080" height="668" role="img" aria-label="Diagram of the three-layer plan. Built once, in hours: an unattended Windows Setup driven by an answer file, then VirtIO drivers and the QEMU guest agent, then Cloudbase-Init installed but not yet run, then sysprep generalize. The result is a read-only golden qcow2 image. Per instance, in seconds: three clones, each a thin overlay on that golden image paired with its own config-drive ISO carrying that machine's identity.">
+  <style>
+    .g   { fill: #eef1f5; }
+    .band{ fill: #f6f8fa; stroke: #c9d0d8; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .box { fill: #ffffff; stroke: #b3bcc7; stroke-width: 1.5; }
+    .acb { fill: #ffffff; stroke: #1a6e7e; stroke-width: 1.5; }
+    .gold{ fill: #ffffff; stroke: #14181d; stroke-width: 2.5; }
+    .in1 { fill: #f4f6f9; stroke: #c9d0d8; stroke-width: 1.2; }
+    .in2 { fill: #f4f6f9; stroke: #1a6e7e; stroke-width: 1.2; }
+    .ink { fill: #14181d; }
+    .mut { fill: #5c6673; }
+    .ln  { stroke: #6f7a87; stroke-width: 2; fill: none; }
+    .acl { stroke: #1a6e7e; stroke-width: 2; fill: none; }
+    .acc { fill: #1a6e7e; }
+    .num { fill: #1a6e7e; }
+    .numt{ fill: #ffffff; }
+    .ttl { font: 600 17px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sec { font: 600 14px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .lbl { font: 600 14.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sml { font: 400 12.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .mono{ font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .mnb { font: 600 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .mns { font: 400 11.5px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .tny { font: 600 11.5px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .cnt { font: 700 12px ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .g   { fill: #171a1f; }
+      .band{ fill: #1b1f25; stroke: #3a434e; }
+      .box { fill: #222831; stroke: #414b57; }
+      .acb { fill: #222831; stroke: #6fc2d4; }
+      .gold{ fill: #222831; stroke: #e9edf2; }
+      .in1 { fill: #1d2229; stroke: #414b57; }
+      .in2 { fill: #1d2229; stroke: #6fc2d4; }
+      .ink { fill: #e9edf2; }
+      .mut { fill: #9aa5b1; }
+      .ln  { stroke: #8b95a1; }
+      .acl { stroke: #6fc2d4; }
+      .acc { fill: #6fc2d4; }
+      .num { fill: #6fc2d4; }
+      .numt{ fill: #171a1f; }
+    }
+  </style>
+  <defs>
+    <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f7a87"/>
+    </marker>
+  </defs>
+
+  <rect class="g" x="0" y="0" width="1080" height="668"/>
+  <text class="ttl ink" x="48" y="44">Three layers: what is built once, and what is built per machine</text>
+
+  <!-- ===== band A ===== -->
+  <rect class="band" x="48" y="70" width="984" height="164" rx="14"/>
+  <text class="sec ink" x="70" y="96">Build once — hours</text>
+
+  <rect class="acb" x="70" y="112" width="220" height="96" rx="10"/>
+  <text class="lbl ink" x="180" y="148" text-anchor="middle">Windows Setup</text>
+  <text class="mono mut" x="180" y="170" text-anchor="middle">autounattend.xml</text>
+  <text class="tny mut" x="180" y="190" text-anchor="middle">no clicks, driver preloaded</text>
+  <circle class="num" cx="88" cy="112" r="11"/>
+  <text class="cnt numt" x="88" y="116" text-anchor="middle">1</text>
+
+  <line class="ln" x1="294" y1="160" x2="306" y2="160" marker-end="url(#b1)"/>
+
+  <rect class="box" x="310" y="112" width="220" height="96" rx="10"/>
+  <text class="lbl ink" x="420" y="148" text-anchor="middle">VirtIO drivers</text>
+  <text class="sml mut" x="420" y="170" text-anchor="middle">+ QEMU guest agent</text>
+  <text class="tny mut" x="420" y="190" text-anchor="middle">silent install at first logon</text>
+
+  <line class="ln" x1="534" y1="160" x2="546" y2="160" marker-end="url(#b1)"/>
+
+  <rect class="acb" x="550" y="112" width="220" height="96" rx="10"/>
+  <text class="lbl ink" x="660" y="148" text-anchor="middle">Cloudbase-Init</text>
+  <text class="sml mut" x="660" y="170" text-anchor="middle">installed, not yet run</text>
+  <text class="tny mut" x="660" y="190" text-anchor="middle">waits for a config-drive</text>
+  <circle class="num" cx="568" cy="112" r="11"/>
+  <text class="cnt numt" x="568" y="116" text-anchor="middle">2</text>
+
+  <line class="ln" x1="774" y1="160" x2="786" y2="160" marker-end="url(#b1)"/>
+
+  <rect class="box" x="790" y="112" width="220" height="96" rx="10"/>
+  <text class="mnb ink" x="900" y="148" text-anchor="middle">sysprep /generalize</text>
+  <text class="sml mut" x="900" y="170" text-anchor="middle">forget SID and hardware</text>
+  <text class="tny mut" x="900" y="190" text-anchor="middle">the risky step</text>
+
+  <!-- ===== golden ===== -->
+  <line class="ln" x1="540" y1="234" x2="540" y2="272" marker-end="url(#b1)"/>
+  <rect class="gold" x="336" y="276" width="408" height="86" rx="10"/>
+  <text class="mnb ink" x="540" y="310" text-anchor="middle">win11-golden.qcow2</text>
+  <text class="sml mut" x="540" y="333" text-anchor="middle">read-only · checksummed · never booted again</text>
+
+  <!-- fan out -->
+  <path class="ln" d="M540,362 L540,388 L215,388 L215,414" marker-end="url(#b1)"/>
+  <path class="ln" d="M540,362 L540,414" marker-end="url(#b1)"/>
+  <path class="ln" d="M540,362 L540,388 L865,388 L865,414" marker-end="url(#b1)"/>
+
+  <!-- ===== band B ===== -->
+  <rect class="band" x="48" y="418" width="984" height="200" rx="14"/>
+  <text class="sec ink" x="92" y="444">Per instance — seconds</text>
+  <circle class="num" cx="70" cy="418" r="11"/>
+  <text class="cnt numt" x="70" y="422" text-anchor="middle">3</text>
+
+  <!-- clone 1 -->
+  <rect class="box" x="70" y="456" width="290" height="142" rx="10"/>
+  <text class="mnb ink" x="88" y="484">win11-lab01</text>
+  <rect class="in1" x="88" y="498" width="254" height="40" rx="7"/>
+  <text class="mns ink" x="102" y="514">overlay qcow2 → golden</text>
+  <text class="mns mut" x="102" y="530">a few hundred KB at birth</text>
+  <rect class="in2" x="88" y="546" width="254" height="40" rx="7"/>
+  <text class="mns ink" x="102" y="562">config-drive.iso</text>
+  <text class="mns mut" x="102" y="578">name · IP · users · installers</text>
+
+  <!-- clone 2 -->
+  <rect class="box" x="395" y="456" width="290" height="142" rx="10"/>
+  <text class="mnb ink" x="413" y="484">win11-lab02</text>
+  <rect class="in1" x="413" y="498" width="254" height="40" rx="7"/>
+  <text class="mns ink" x="427" y="514">overlay qcow2 → golden</text>
+  <text class="mns mut" x="427" y="530">a few hundred KB at birth</text>
+  <rect class="in2" x="413" y="546" width="254" height="40" rx="7"/>
+  <text class="mns ink" x="427" y="562">config-drive.iso</text>
+  <text class="mns mut" x="427" y="578">name · IP · users · installers</text>
+
+  <!-- clone 3 -->
+  <rect class="box" x="720" y="456" width="290" height="142" rx="10"/>
+  <text class="mnb ink" x="738" y="484">win11-lab03</text>
+  <rect class="in1" x="738" y="498" width="254" height="40" rx="7"/>
+  <text class="mns ink" x="752" y="514">overlay qcow2 → golden</text>
+  <text class="mns mut" x="752" y="530">a few hundred KB at birth</text>
+  <rect class="in2" x="738" y="546" width="254" height="40" rx="7"/>
+  <text class="mns ink" x="752" y="562">config-drive.iso</text>
+  <text class="mns mut" x="752" y="578">name · IP · users · installers</text>
+
+  <text class="sml mut" x="48" y="650">Layer 1 removes the clicks. Layer 2 supplies the per-machine identity. Layer 3 makes a new VM a file operation, not an installation.</text>
+</svg>
